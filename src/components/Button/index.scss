@@ -1,0 +1,36 @@
+@use '~styles/colors.scss' as colors;
+
+.button {
+  font-family: 'Noto Sans', sans-serif;
+  color: rgb(255, 255, 255);
+  font-size: 1.6rem;
+  font-weight: 500;
+
+  padding: 1.6rem;
+  border: unset;
+
+  background-color: colors.$primary200;
+  border-radius: 1.4rem;
+
+  transition: 0.3s ease-in-out;
+
+  cursor: pointer;
+  appearance: none;
+
+  &--block {
+    width: 100%;
+
+    display: block;
+  }
+
+  &:hover:not(:disabled) {
+    background: colors.$primary600;
+    transform: scale(1.02);
+  }
+
+  &:disabled {
+    background: colors.$gray600;
+
+    cursor: not-allowed;
+  }
+}

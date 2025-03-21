@@ -1,0 +1,60 @@
+@use '~styles/colors' as colors;
+@use '~styles/fonts.scss' as fonts;
+
+.radio-container {
+  display: inline-flex;
+
+  align-items: center;
+
+  color: colors.$gray600;
+
+  padding: 1rem 8rem 1rem 1rem;
+  border: 0.15rem solid colors.$gray200;
+
+  border-radius: 1.5rem;
+
+  transition: border-color 0.3s;
+
+  cursor: pointer;
+
+  &--borderless {
+    padding: 0;
+    border: 0;
+  }
+
+  &:has(&__input:checked) {
+    color: colors.$primary200;
+
+    border-color: colors.$primary200;
+  }
+
+  &__input {
+    width: 1.6rem;
+    height: 1.6rem;
+
+    margin: 0.8rem;
+    border: 1px solid colors.$gray200;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+    appearance: none;
+
+    &:checked {
+      border-color: colors.$primary200;
+
+      background: url('./images/ellipse.svg') no-repeat center center/70% 70%;
+    }
+
+    &:disabled {
+      border-color: colors.$gray200;
+
+      cursor: not-allowed;
+    }
+  }
+
+  &__dot {
+    font-family: fonts.$primaryFont;
+    font-size: fonts.$xs;
+  }
+}

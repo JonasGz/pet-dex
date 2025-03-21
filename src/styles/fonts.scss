@@ -1,0 +1,36 @@
+$primaryFont: 'Montserrat', sans-serif;
+$secondaryFont: 'Wix Madefor Display', sans-serif;
+$tertiaryFont: 'Helvetica', sans-serif;
+$fourthFont: 'Noto Sans', sans-serif;
+$fifthFont: 'Poppins', sans-serif;
+$sixthFont: 'Catamaran', sans-serif;
+
+$xxs: 1.2rem;
+$xs: 1.4rem;
+$sm: 1.6rem;
+$md: 2rem;
+$lg: 2.4rem;
+$xl: 3rem;
+$xl2: 3.6rem;
+$xl3: 4.8rem;
+$xl4: 6rem;
+
+$regular: 400;
+$medium: 500;
+$semiBold: 600;
+$bold: 700;
+
+$normal: normal;
+$italic: italic;
+$underline: underline;
+
+//função para criar estilos tipográficos em geral
+@function get-font-style($color, $family, $weight, $size, $style) {
+  @return (
+    color: $color,
+    font-family: $family,
+    font-weight: $weight,
+    font-size: $size,
+    font-style: $style
+  );
+}

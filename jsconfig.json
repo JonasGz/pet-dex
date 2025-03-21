@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "types": ["vitest/globals"],
+    "baseUrl": ".",
+    "paths": {
+      "@testing-library/vanilla": ["src/__tests__/index.js"],
+      "~src/*": ["src/*"],
+      "~styles/*": ["src/styles/*"],
+      "~stories/*": ["src/stories/*"],
+      "~layouts/*": ["src/layouts/*"]
+    }
+  }
+}

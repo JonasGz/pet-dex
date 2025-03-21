@@ -1,0 +1,29 @@
+name: Code Style
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  code-style:
+    runs-on: ubuntu-latest
+    name: code-style
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup deps
+        uses: devhatt/workflows/.github/actions/pnpm-setup@main
+
+      - name: Run prettier in all files
+        run: pnpm exec prettier . --check --ignore-unknown
+
+      - name: Run stylelint in scss files
+        run: pnpm exec stylelint . --allow-empty-input
+
+      - name: Run eslint in code files
+        run: pnpm exec eslint . --report-unused-disable-directives --max-warnings 0
