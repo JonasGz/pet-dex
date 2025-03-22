@@ -1,13 +1,12 @@
-import NoPetRegirestedPage from '~src/layouts/pages/NoPetRegirested';
+import Login from '~src/layouts/pages/Login';
 
 export default {
   pathname: '/account',
   element: () => {
     const $content = document.createElement('div');
     $content.classList.add('home__content-page');
-    $content.style.backgroundColor = 'red';
-    const noPetRegirestedPage = new NoPetRegirestedPage();
-    noPetRegirestedPage.mount($content);
+    const loginPage = new Login()
+    loginPage.mount($content);
     return $content;
   },
 };

@@ -1,14 +1,10 @@
 import { Component } from 'pet-dex-utilities';
 import Field from './components/Field/index';
 import TextInput from '../TextInput';
-import Dropdown from '../Dropdown';
 import Button from '../Button/index';
 import {
   isNameValid,
-  isBirthValid,
-  isLocalValid,
   isEmailValid,
-  isPhoneValid,
   isPasswordValid,
 } from '../../utils/validations';
 import googleIcon from './images/google-icon.svg';
@@ -58,43 +54,6 @@ export default function RegisterForm() {
     }),
   });
 
-  const surname = new Field({
-    label: 'Sobrenome',
-    error: 'Informe seu sobrenome',
-    content: new TextInput({
-      id: 'surname',
-      placeholder: 'Devhat',
-    }),
-  });
-
-  const birth = new Field({
-    label: 'Data de nascimento',
-    error: 'Informe sua data de nascimento',
-    content: new TextInput({
-      id: 'birth',
-      placeholder: '13/12/1995',
-    }),
-  });
-
-  const local = new Field({
-    label: 'Cidade',
-    error: 'Informe sua cidade',
-    content: new Dropdown({
-      items: [
-        {
-          text: 'Fortaleza',
-          value: 'FOR',
-        },
-        {
-          text: 'São Paulo',
-          value: 'SP',
-        },
-      ],
-      id: 'local',
-      placeholder: 'São Paulo, SP',
-    }),
-  });
-
   const email = new Field({
     label: 'E-mail',
     error: 'Informe um E-mail válido',
@@ -102,15 +61,6 @@ export default function RegisterForm() {
       id: 'email',
       placeholder: 'dev@devhat.com.br',
       type: 'email',
-    }),
-  });
-
-  const phone = new Field({
-    label: 'Telefone',
-    error: 'Informe um número de telefone válido',
-    content: new TextInput({
-      id: 'phone',
-      placeholder: '(11) 92875-3356',
     }),
   });
 
@@ -139,35 +89,47 @@ export default function RegisterForm() {
     id: 'register-button',
     text: 'Cadastrar',
     isFullWidth: true,
-    isDisabled: false,
+    isDisabled: true,
   });
 
   name.mount($fields);
-  surname.mount($fields);
-  birth.mount($fields);
-  local.mount($fields);
   email.mount($fields);
-  phone.mount($fields);
   password.mount($fields);
   repeatPassword.mount($fields);
   registerButton.mount($formButton);
 
+    const validateFields = () => {
+      const nameValue = name.content.selected.get('input-text').value;
+      const emailValue = email.content.selected.get('input-text').value;
+      const passwordValue = password.content.selected.get('input-text').value;
+      const repeatPasswordValue = repeatPassword.content.selected.get('input-text').value;
+
+  
+      if (nameValue.trim() && emailValue.trim() && passwordValue && repeatPasswordValue) {
+        registerButton.enable();
+      } else {
+        registerButton.disable();
+      }
+    };
+
+
+    name.content.selected.get('input-text')
+    .addEventListener('input', validateFields);
+    email.content.selected.get('input-text')
+    .addEventListener('input', validateFields);
+    password.content.selected.get('input-text')
+    .addEventListener('input', validateFields);
+    repeatPassword.content.selected.get('input-text')
+    .addEventListener('input', validateFields);
+
   registerButton.listen('click', async () => {
     const nameValue = name.getContent().getValue();
-    const surnameValue = surname.getContent().getValue();
-    const birthValue = birth.getContent().getValue();
-    const localValue = local.getContent().getValue();
     const emailValue = email.getContent().getValue();
-    const phoneValue = phone.getContent().getValue();
     const passwordValue = password.getContent().getValue();
     const repeatPasswordValue = repeatPassword.getContent().getValue();
 
     let nameValid = true;
-    let surnameValid = true;
-    let birthValid = true;
-    let localValid = true;
     let emailValid = true;
-    let phoneValid = true;
     let passwordValid = true;
     let repeatPasswordValid = true;
 
@@ -178,38 +140,12 @@ export default function RegisterForm() {
       name.getContent().inputError();
     }
 
-    if (!isNameValid(surnameValue)) {
-      surnameValid = false;
-
-      surname.showError();
-      surname.getContent().inputError();
-    }
-
-    if (!isBirthValid(birthValue)) {
-      birthValid = false;
-
-      birth.showError();
-      birth.getContent().inputError();
-    }
-
-    if (!isLocalValid(localValue)) {
-      localValid = false;
-
-      local.showError();
-    }
 
     if (!isEmailValid(emailValue)) {
       emailValid = false;
 
       email.showError();
       email.getContent().inputError();
-    }
-
-    if (!isPhoneValid(phoneValue)) {
-      phoneValid = false;
-
-      phone.showError();
-      phone.getContent().inputError();
     }
 
     if (!isPasswordValid(passwordValue)) {
@@ -233,26 +169,9 @@ export default function RegisterForm() {
       name.resolveError();
     }
 
-    if (surnameValid) {
-      surname.resolveError();
-    }
-
-    if (birthValid) {
-      birth.resolveError();
-    }
-
-    if (localValid) {
-      local.resolveError();
-    }
-
     if (emailValid) {
       email.resolveError();
     }
-
-    if (phoneValid) {
-      phone.resolveError();
-    }
-
     if (passwordValid) {
       password.resolveError();
     }
@@ -261,23 +180,16 @@ export default function RegisterForm() {
       repeatPassword.resolveError();
     }
 
+
     if (
       nameValid &&
-      surnameValid &&
-      birthValid &&
-      localValid &&
       emailValid &&
-      phoneValid &&
       passwordValid &&
       repeatPasswordValid
     ) {
       await UserService.registerUser({
         name: nameValue,
-        surname: surnameValue,
-        birth: birthValue,
-        local: localValue,
         email: emailValue,
-        phone: phoneValue,
         password: passwordValue,
       });
 

@@ -34,7 +34,7 @@ const html = `
       </form>
 
       <span class="login-form-container__signup">Não tem uma conta? 
-        <a href="#" class="signup-link">Inscreva-se</a>
+        <a href="/account/create-account" class="signup-link">Inscreva-se</a>
       </span>
 
       <div class="login-form-container__separator">

@@ -4,13 +4,13 @@ import petUrl from '../../../images/pet-dex.svg';
 import { UserService } from '../../../services/userService';
 import configuracoes from './images/configuracoes.svg';
 import conta from './images/conta.svg';
-import doacoes from './images/doacoes.svg';
 import exit from './images/exit.svg';
 import exitMenu from './images/exitmenu.svg';
 import meusPets from './images/meuspets.svg';
 import notificacoes from './images/notifications.svg';
 import perfil from './images/perfil.svg';
 import petdex from './images/petdex.svg';
+import register from './images/register.svg';
 import './index.scss';
 
 const html = `
@@ -44,12 +44,12 @@ const html = `
               <img src="${petdex}" alt="Pet Dex">Pet Dex
             </a>
           </li>
+          <hr class="side-menu-content__lineinside"/>
           <li>
-            <a data-vanilla-route-link="spa" class="side-menu-content__menuitens" href="/donates">
-              <img src="${doacoes}" alt="Doacoes">Doações
+            <a data-vanilla-route-link="spa" class="side-menu-content__menuitens" href="/account/create-account">
+              <img src="${register}" alt="registro">Registro
             </a>
           </li>
-          <hr class="side-menu-content__lineinside"/>
           <li>
             <a data-vanilla-route-link="spa" class="side-menu-content__menuitens" href="/account">
               <img src="${conta}" alt="conta">Conta
