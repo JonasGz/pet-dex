@@ -10,7 +10,6 @@ import {
 import googleIcon from './images/google-icon.svg';
 import facebookIcon from './images/facebook-icon.svg';
 import './index.scss';
-import { UserService } from '../../services/userService';
 
 const events = ['register'];
 
@@ -187,13 +186,7 @@ export default function RegisterForm() {
       passwordValid &&
       repeatPasswordValid
     ) {
-      await UserService.registerUser({
-        name: nameValue,
-        email: emailValue,
-        password: passwordValue,
-      });
-
-      this.register();
+      this.register(nameValue, emailValue, passwordValue);
     }
   });
 }
@@ -202,8 +195,8 @@ RegisterForm.prototype = Object.assign(
   RegisterForm.prototype,
   Component.prototype,
   {
-    register() {
-      this.emit('register');
+    register(nameValue, emailValue, passwordValue) {
+      this.emit('register', nameValue, emailValue, passwordValue);
     },
   },
 );

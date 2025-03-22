@@ -1,12 +1,13 @@
-import PetVetPage from '~src/layouts/pages/PetVet';
+import PetName from '~src/layouts/pages/PetName';
+
 
 export default {
-  pathname: '/pet-vet',
+  pathname: '/profile',
   element: () => {
     const $content = document.createElement('div');
     $content.classList.add('home__content-page');
-    const petVet = new PetVetPage();
-    petVet.mount($content);
+    const petName = new PetName()
+    petName.mount($content);
     return $content;
   },
 };

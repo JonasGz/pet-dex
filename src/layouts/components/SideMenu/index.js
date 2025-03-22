@@ -20,7 +20,7 @@ const html = `
       </figure>
       <div class="side-menu-nav__icons">
         <a href="#"><img class="side-menu-nav__notifications" src="${notificacoes}" alt="notificacoes"></a>
-        <a href="#"><img class="side-menu-nav__perfil" src="${perfil}" alt="meu perfil"></a>
+        <a href="/account"><img class="side-menu-nav__perfil" src="${perfil}" alt="meu perfil"></a>
         <a href="#"><img class="side-menu-nav__exit" src="${exit}" alt="sair"></a>
       </div>
       <img data-select="exitMenu" class="side-menu-nav__exitmenu" src="${exitMenu}" alt="Fechar Menu">
@@ -35,7 +35,7 @@ const html = `
       <div class="side-menu-content__itens" alt="itens-um">
         <ul class="side-menu-content__ul" data-select="menuitens">
           <li>
-            <a data-vanilla-route-link="spa" class="side-menu-content__menuitens" href="/">
+            <a data-vanilla-route-link="spa" class="side-menu-content__menuitens" href="/pets">
               <img src="${meusPets}" alt="Meus Pets">Meus Pets
             </a>
           </li>
@@ -51,8 +51,8 @@ const html = `
             </a>
           </li>
           <li>
-            <a data-vanilla-route-link="spa" class="side-menu-content__menuitens" href="/account">
-              <img src="${conta}" alt="conta">Conta
+            <a data-vanilla-route-link="spa" class="side-menu-content__menuitens" href="/account/login">
+              <img src="${conta}" alt="conta">Login
             </a>
           </li>
           <li>

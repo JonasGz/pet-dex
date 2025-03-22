@@ -2,9 +2,10 @@ import { Component } from 'pet-dex-utilities';
 import { Router } from 'vanilla-routing';
 import LoginForm from '~src/components/LoginForm';
 import './index.scss';
+import { login } from '~src/services/firebase';
 
 const html = `
-  <div data-select="container" class="no-pet-regirested-page">
+  <div data-select="container" class="login-page">
   
   </div>;
 `;
@@ -18,8 +19,13 @@ export default function Login() {
 
   this.loginForm.mount($container)
 
-  this.loginForm.listen('login', () => {
-    console.log('logou')
+  this.loginForm.listen('login', async (email, password) => {
+     try {
+         await login(email, password)
+         Router.go('/')
+       } catch(error) {
+         throw new Error(error)
+       }
   })
   // this.button.listen('click', () => {
   //   Router.go('/add/addpets');

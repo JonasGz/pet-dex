@@ -125,14 +125,14 @@ export default function LoginForm() {
     if (validPassword) $passwordErrorMessage.classList.remove('show-error');
 
     if (validEmail && validPassword) {
-      this.login();
+      this.login(email, password);
     }
   });
 }
 
 LoginForm.prototype = Object.assign(LoginForm.prototype, Component.prototype, {
-  login() {
-    this.emit('login');
+  login(email, password) {
+    this.emit('login', email, password);
   },
   validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;

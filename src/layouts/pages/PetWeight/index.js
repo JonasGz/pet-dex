@@ -3,15 +3,16 @@ import Button from '~src/components/Button';
 import RadioButton from '~src/components/RadioButton';
 import RangeSlider from '~src/components/RangeSlider';
 import TextInput from '~src/components/TextInput';
-import UploadImage from '~src/components/UploadImage';
 import './index.scss';
+import PetImage from '~src/components/PetImage';
+import { Router } from 'vanilla-routing';
 
 const events = ['submit'];
 
 const html = `
   <div class="pet-weight-page">
     <div class="pet-weight-page__content" data-select="container">
-      <div class="pet-weight-page__image-container" data-select="image-container"></div>
+      <div data-select="image-container"></div>
 
       <div class="pet-weight-page__description">
         <h1 class="pet-weight-page__title">Qual é o peso do seu animal de estimação?</h1>
@@ -27,12 +28,12 @@ const html = `
   </div>;
 `;
 
-export default function PetWeight({ petPhoto }) {
+export default function PetWeight() {
   Component.call(this, { html, events });
   this.initializeComponents();
   this.setupEventListeners();
   this.applyCssClasses();
-  this.petPhoto = petPhoto;
+  this.petPhoto = 'teste';
   this.weight = 10;
 }
 
@@ -57,7 +58,7 @@ PetWeight.prototype = Object.assign(PetWeight.prototype, Component.prototype, {
     $sliderContainer,
     $inputsContainer,
   ) {
-    this.image = new UploadImage();
+    this.image = new PetImage();
     this.slider = new RangeSlider();
     this.input = new TextInput({
       placeholder: 'Peso',
@@ -71,11 +72,6 @@ PetWeight.prototype = Object.assign(PetWeight.prototype, Component.prototype, {
       value: 'kg',
       name: 'weight-unit',
     });
-    this.radioLB = new RadioButton({
-      text: 'LB',
-      value: 'lb',
-      name: 'weight-unit',
-    });
     this.button = new Button({
       text: 'Continuar',
       isFullWidth: false,
@@ -86,14 +82,10 @@ PetWeight.prototype = Object.assign(PetWeight.prototype, Component.prototype, {
     this.slider.mount($sliderContainer);
     this.input.mount($inputsContainer);
     this.radioKG.mount($inputsContainer);
-    this.radioLB.mount($inputsContainer);
     this.button.mount($footer);
   },
 
   applyCssClasses() {
-    this.image.selected
-      .get('image-preview')
-      .classList.add('pet-weight-page__image');
     this.slider.selected
       .get('range-slider')
       .classList.add('pet-weight-page__slider');
@@ -107,9 +99,6 @@ PetWeight.prototype = Object.assign(PetWeight.prototype, Component.prototype, {
       .get('input-text-container')
       .classList.add('pet-weight-page__input-container');
     this.radioKG.selected
-      .get('radio-container')
-      .classList.add('pet-weight-page__radio');
-    this.radioLB.selected
       .get('radio-container')
       .classList.add('pet-weight-page__radio');
     this.button.selected.get('button').classList.add('pet-weight-page__button');
@@ -133,6 +122,7 @@ PetWeight.prototype = Object.assign(PetWeight.prototype, Component.prototype, {
       const finalWeightUnit = this.weightUnit();
       const finalWeight = this.weight;
       this.emit('submit', { weight: finalWeight, weightUnit: finalWeightUnit });
+      Router.go('/pet-vet')
     });
   },
 

@@ -1,18 +1,17 @@
 import { Component } from 'pet-dex-utilities';
-import { Router } from 'vanilla-routing';
+import PetImage from '~src/components/PetImage';
 import TextInput from '../../../components/TextInput';
-import UploadImage from '../../../components/UploadImage';
 import Button from '../../../components/Button';
-
 import './index.scss';
+import { Router } from 'vanilla-routing';
 
 const events = ['submit'];
 
 const html = `
-  <div class='pet-name'>
+  <div class='pet-race'>
     <div class='pet-name__container'>
       <div class='pet-name__image' data-select='upload-image-container'></div>
-      <h1 class='pet-name__title'>Qual o nome do seu bichinho?</h1>
+      <h1 class='pet-name__title'>O que é o seu bichinho?</h1>
       <div class='pet-name__input' data-select='input-container'></div>
     </div>
     <div class="pet-name__footer">
@@ -21,7 +20,7 @@ const html = `
   </div>
 `;
 
-export default function PetName() {
+export default function PetRace() {
   Component.call(this, { html, events });
 
   const $inputContainer = this.selected.get('input-container');
@@ -29,37 +28,33 @@ export default function PetName() {
   const $buttonContainer = this.selected.get('button-container');
 
   this.input = new TextInput({
-    placeholder: 'Nome do Pet',
+    placeholder: 'Gato',
   });
 
-  this.upload = new UploadImage();
+  this.petImage = new PetImage();
   this.button = new Button({
     text: 'Continuar',
     isFullWidth: true,
     isDisabled: false,
   });
 
-  const updateButtonVisibility = () => {
+  const buttonEnabled = () => {
     const input = this.input.getValue();
-    const image = this.upload.getImage();
 
-    this.button.setIsDisabled(!(input && image));
+    this.button.setIsDisabled(!(input));
   };
-  updateButtonVisibility();
-
-  this.upload.listen('value:change', updateButtonVisibility);
-  this.input.listen('value:change', updateButtonVisibility);
+  buttonEnabled();
+  this.input.listen('value:change', buttonEnabled);
 
   this.button.listen('click', () => {
-    const image = this.upload.getImage();
     const name = this.input.getValue();
-    this.emit('submit', { image, name });
-    Router.go('/pet-race')
+    this.emit('submit', { name });
+    Router.go('/pet-birthday')
   });
 
-  this.upload.mount($uploadImage);
+  this.petImage.mount($uploadImage);
   this.input.mount($inputContainer);
   this.button.mount($buttonContainer);
 }
 
-PetName.prototype = Object.assign(PetName.prototype, Component.prototype);
+PetRace.prototype = Object.assign(PetRace.prototype, Component.prototype);

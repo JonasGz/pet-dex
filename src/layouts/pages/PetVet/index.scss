@@ -3,8 +3,7 @@
 @use '~styles/breakpoints' as breakpoints;
 
 .petvet-page {
-  height: 100%;
-
+  max-width: 60rem;
   display: flex;
   flex-direction: column;
 

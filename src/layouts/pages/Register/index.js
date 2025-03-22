@@ -2,9 +2,10 @@ import { Component } from 'pet-dex-utilities';
 import { Router } from 'vanilla-routing';
 import './index.scss';
 import RegisterForm from '~src/components/RegisterForm';
+import { register } from '~src/services/firebase';
 
 const html = `
-  <div data-select="container" class="no-pet-regirested-page">
+  <div data-select="container" class="register-page">
   
   </div>;
 `;
@@ -18,12 +19,15 @@ export default function Register() {
 
   this.registerForm.mount($container)
 
-  this.registerForm.listen('register', () => {
-    console.log('registrou')
+  this.registerForm.listen('register', async (name, email, password) => {
+    try {
+      await register(name, email, password)
+      Router.go('/')
+    } catch(error) {
+      console.error('Erro ao registrar', error)
+    }
+    
   })
-  // this.button.listen('click', () => {
-  //   Router.go('/add/addpets');
-  // });
 }
 
 Register.prototype = Object.assign(

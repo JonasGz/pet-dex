@@ -3,8 +3,6 @@
 @use '~styles/fonts.scss' as fonts;
 
 .pet-weight-page {
-  min-height: 100%;
-
   display: grid;
 
   place-items: center;
@@ -88,10 +86,6 @@
   .pet-weight-page {
     align-items: flex-start;
 
-    &__image-container {
-      margin-top: 3rem;
-      margin-bottom: 3rem;
-    }
 
     &__slider-container {
       margin-top: 2rem;

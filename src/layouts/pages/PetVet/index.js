@@ -4,6 +4,7 @@ import Radio from '~src/components/RadioButton';
 import TextArea from '~src/components/TextArea';
 import Vaccine from '~src/components/Vaccine';
 
+import { Router } from 'vanilla-routing';
 import cuidadosEspeciais from './images/cuidadosEspeciais.svg';
 import estetoscopio from './images/estetoscopio.svg';
 
@@ -79,14 +80,35 @@ function createAndMount({ name, text, mountTo, value, borderless }) {
 
 export default function PetVetPage({ vaccines = [] } = {}) {
   Component.call(this, { html, events });
-
   const $footer = this.selected.get('footer');
   const $specialCareRadio = this.selected.get('special-care-radio');
   const $specialCareText = this.selected.get('special-care-text');
   const $neuteredRadio = this.selected.get('neutered-radio');
   const $cardGroup = this.selected.get('card-group');
 
-  this.vaccine = new Vaccine({ vaccines });
+  const listVaccines = [
+    {
+      id: '1',
+      veterinary: 'Dr octopus',
+      title: 'Antirrábica',
+      date: new Date().toISOString(),
+    },
+    {
+      id: '2',
+      veterinary: 'Dr Felipa',
+      title: 'Raiva',
+      date: new Date(2023, 5, 2).toISOString(),
+    },
+    {
+      id: '3',
+      veterinary: 'Dr octopus',
+      title: 'Raiva',
+      date: new Date(2023, 2, 2).toISOString(),
+    },
+  ]
+
+  this.vaccine = new Vaccine({ vaccines: listVaccines });
+
   this.vaccine.mount($cardGroup);
 
   const notSpecialCare = createAndMount({
@@ -163,9 +185,11 @@ export default function PetVetPage({ vaccines = [] } = {}) {
     form.isNeutered = getBooleanValue(neuteredValue);
     form.isSpecialCare = getBooleanValue(specialCareValue);
     form.specialCareText = specialCareText;
-
     form.vaccines = this.vaccine.listVaccines();
+
     this.emit('submit', form);
+
+    Router.go('/pets')
   };
 
   this.button.listen('click', emitForm);

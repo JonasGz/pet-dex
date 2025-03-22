@@ -1,13 +1,12 @@
-import NoPetRegirestedPage from '~src/layouts/pages/NoPetRegirested';
+import PetWeight from '~src/layouts/pages/PetWeight';
 
 export default {
   pathname: '/pet-weight',
   element: () => {
     const $content = document.createElement('div');
     $content.classList.add('home__content-page');
-    $content.style.backgroundColor = 'orange';
-    const noPetRegirestedPage = new NoPetRegirestedPage();
-    noPetRegirestedPage.mount($content);
+    const petWeight = new PetWeight();
+    petWeight.mount($content);
     return $content;
   },
 };

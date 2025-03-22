@@ -98,14 +98,14 @@
   }
 }
 
-@container (min-height: 790px) {
-  @include breakpoints.from667 {
+@include breakpoints.from667 {
     .vaccine {
       overflow: auto;
 
       &__scroll {
         overflow: auto;
+        max-height: 17rem;
       }
     }
-  }
 }
+

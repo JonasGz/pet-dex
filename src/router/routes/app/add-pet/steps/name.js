@@ -1,13 +1,12 @@
-import NoPetRegirestedPage from '~src/layouts/pages/NoPetRegirested';
+import PetName from '~src/layouts/pages/PetName';
 
 export default {
   pathname: '/pet-name',
   element: () => {
     const $content = document.createElement('div');
     $content.classList.add('home__content-page');
-    $content.style.backgroundColor = 'yellow';
-    const noPetRegirestedPage = new NoPetRegirestedPage();
-    noPetRegirestedPage.mount($content);
+    const petName = new PetName();
+    petName.mount($content);
     return $content;
   },
 };
