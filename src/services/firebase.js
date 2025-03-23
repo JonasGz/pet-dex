@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from "firebase/auth";
+import { getFirestore, setDoc, doc, getDoc, updateDoc, arrayUnion, getDocs } from "firebase/firestore";
+import { Router } from "vanilla-routing";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJt47vVZ0Yuq4UWXZuPE5VsecjFQKOP2o",
@@ -13,16 +15,67 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth();
+const db = getFirestore();
 
-export const login = async (email, password) => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const {user} = userCredential;
-    console.log(user)
-    return user
-  } catch (error) {
-    console.error("Erro ao registrar usuário:", error.message);
-    throw error;
+
+export const getPets = async () => {
+  const user = auth.currentUser;
+
+  if (user) {
+    const userRef = doc(db, "users", user.uid);
+    try {
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        const pets = userData.pets || []; 
+        localStorage.setItem("pets", JSON.stringify(pets))
+        return pets;
+      } 
+        console.log("Usuário não encontrado");
+        return [];
+      
+    } catch (error) {
+      console.error("Erro ao pegar pets:", error);
+      throw error;
+    }
+  } else {
+    console.log("Nenhum usuário autenticado");
+    return [];
+  }
+};
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+      const event = new CustomEvent("auth", { detail: { hasUser: true } });
+      window.dispatchEvent(event);
+      getPets()
+      
+  } else {
+      const event = new CustomEvent("auth", {detail: { hasUser: false}})
+      window.dispatchEvent(event)
+      console.log("Nenhum usuário autenticado");
+  }
+});
+
+const handleHasAuth = (event) => {
+  localStorage.setItem("hasUser", JSON.stringify(event.detail.hasUser))
+}
+
+window.addEventListener("auth", handleHasAuth)
+
+const createUserDocument = async (user) => {
+  if (!user) return;
+
+  const userRef = doc(db, "users", user.uid);
+  const userSnap = await getDoc(userRef);
+
+  if (!userSnap.exists()) {
+      await setDoc(userRef, {
+          name: user.displayName || "Usuário",
+          email: user.email,
+          createdAt: new Date(),
+      });
   }
 };
 
@@ -33,8 +86,48 @@ export const register = async (name, email, password) => {
     await updateProfile(user, {
       displayName: name,
     });
+
+    await createUserDocument(user)
   } catch (error) {
     console.error("Erro ao registrar usuário:", error.message);
     throw error;
+  }
+};
+
+export const login = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const {user} = userCredential;
+    return user
+  } catch (error) {
+    console.error("Erro ao registrar usuário:", error.message);
+    throw error;
+  }
+};
+
+export const logout = async () => {
+  signOut(auth).then(() => {
+    console.log('deslogado')
+  })
+}
+
+export const addPet = async () => {
+  if (!auth.currentUser) return;
+
+  const userId = auth.currentUser.uid;
+  const userRef = doc(db,'users', userId);
+  const newPet = JSON.parse(localStorage.getItem('pet'));
+    
+  try {
+    await updateDoc(userRef, {
+        pets: arrayUnion({
+            id: crypto.randomUUID(),
+            ...newPet,
+        }),
+    });
+    localStorage.removeItem('pet')
+    console.log("Pet adicionado com sucesso!");
+  } catch (error) {
+      console.error("Erro ao adicionar pet:", error);
   }
 };

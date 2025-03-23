@@ -7,30 +7,28 @@ const html = `
   <div class="card-container">
     <img class="card-container__image" data-select="card-image" src="" alt="">
     <strong class="card-container__title" data-select="card-title"></strong>
-    <button class="card-container__button" data-select="card-button" type="button">Comprar</button>
+    <strong class="card-container__age" data-select="card-age"></strong>
+
   </div>
 `;
 
-export default function Card() {
+export default function Card(name, age, url) {
   Component.call(this, { html, events });
   this.enable = true;
-
-  this.selected.get('card-button').addEventListener('click', () => {
-    if (!this.enable) return;
-    this.purchase();
-  });
+  this.setTitle(name)
+  this.setAge(age)
+  this.setSrc(url)
 }
 
 Card.prototype = Object.assign(Card.prototype, Component.prototype, {
   setTitle(text) {
     this.selected.get('card-title').textContent = text;
   },
-
-  purchase() {
-    this.emit('purchase');
+  setAge(text) {
+    this.selected.get('card-age').textContent = text;
   },
-
-  disable() {
-    this.enable = false;
-  },
+  setSrc(url) {
+    this.selected.get('card-image').src = url;
+  }
+  
 });

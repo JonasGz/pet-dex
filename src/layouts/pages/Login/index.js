@@ -27,9 +27,6 @@ export default function Login() {
          throw new Error(error)
        }
   })
-  // this.button.listen('click', () => {
-  //   Router.go('/add/addpets');
-  // });
 }
 
 Login.prototype = Object.assign(

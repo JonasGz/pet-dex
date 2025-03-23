@@ -5,6 +5,7 @@ import TextInput from '../../../components/TextInput';
 import Button from '../../../components/Button';
 
 import './index.scss';
+import { addData } from '~src/services/localStorage';
 
 const events = ['submit'];
 
@@ -27,13 +28,15 @@ export default function PetBirthday() {
   const $inputContainer = this.selected.get('input-container');
   const $uploadImage = this.selected.get('upload-image-container');
   const $buttonContainer = this.selected.get('button-container');
+  const petImage = JSON.parse(localStorage.getItem('pet'));
+
 
   this.input = new TextInput({
     placeholder: '12',
     type: 'number',
   });
 
-  this.petImage = new PetImage();
+  this.petImage = new PetImage(petImage.name.image);
   this.button = new Button({
     text: 'Continuar',
     isFullWidth: true,
@@ -49,8 +52,9 @@ export default function PetBirthday() {
   this.input.listen('value:change', buttonEnabled);
 
   this.button.listen('click', () => {
-    const name = this.input.getValue();
-    this.emit('submit', { name });
+    const age = this.input.getValue();
+    this.emit('submit', { age });
+    addData(age)
     Router.go('/pet-weight')
   });
 

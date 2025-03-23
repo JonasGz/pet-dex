@@ -5,6 +5,8 @@ import TextArea from '~src/components/TextArea';
 import Vaccine from '~src/components/Vaccine';
 
 import { Router } from 'vanilla-routing';
+import { addData } from '~src/services/localStorage';
+import { addPet, getPets } from '~src/services/firebase';
 import cuidadosEspeciais from './images/cuidadosEspeciais.svg';
 import estetoscopio from './images/estetoscopio.svg';
 
@@ -174,7 +176,7 @@ export default function PetVetPage({ vaccines = [] } = {}) {
     vaccines: undefined,
   };
 
-  const emitForm = () => {
+  const emitForm = async () => {
     const neuteredValue = document.forms[0].elements.neutered.value;
     const specialCareValue = document.forms[1].elements.specialCare.value;
     const specialCareText = this.specialCareText.selected.get('textarea').value;
@@ -188,7 +190,9 @@ export default function PetVetPage({ vaccines = [] } = {}) {
     form.vaccines = this.vaccine.listVaccines();
 
     this.emit('submit', form);
-
+    addData(form)
+    await addPet()
+    await getPets();
     Router.go('/pets')
   };
 

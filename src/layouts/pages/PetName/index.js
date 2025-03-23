@@ -5,6 +5,7 @@ import UploadImage from '../../../components/UploadImage';
 import Button from '../../../components/Button';
 
 import './index.scss';
+import { addData } from '~src/services/localStorage';
 
 const events = ['submit'];
 
@@ -54,6 +55,7 @@ export default function PetName() {
     const image = this.upload.getImage();
     const name = this.input.getValue();
     this.emit('submit', { image, name });
+    addData({ image, name })
     Router.go('/pet-race')
   });
 

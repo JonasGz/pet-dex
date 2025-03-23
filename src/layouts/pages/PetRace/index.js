@@ -4,6 +4,7 @@ import TextInput from '../../../components/TextInput';
 import Button from '../../../components/Button';
 import './index.scss';
 import { Router } from 'vanilla-routing';
+import { addData } from '~src/services/localStorage';
 
 const events = ['submit'];
 
@@ -26,12 +27,13 @@ export default function PetRace() {
   const $inputContainer = this.selected.get('input-container');
   const $uploadImage = this.selected.get('upload-image-container');
   const $buttonContainer = this.selected.get('button-container');
+  const petImage = JSON.parse(localStorage.getItem('pet'));
 
   this.input = new TextInput({
     placeholder: 'Gato',
   });
 
-  this.petImage = new PetImage();
+  this.petImage = new PetImage(petImage.name.image);
   this.button = new Button({
     text: 'Continuar',
     isFullWidth: true,
@@ -49,6 +51,7 @@ export default function PetRace() {
   this.button.listen('click', () => {
     const name = this.input.getValue();
     this.emit('submit', { name });
+    addData(name)
     Router.go('/pet-birthday')
   });
 

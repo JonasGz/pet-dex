@@ -18,7 +18,7 @@ const html = `
     </div>
 `;
 
-export default function PetImage(imgSrc = "https://images.dog.ceo/breeds/spaniel-brittany/n02101388_5801.jpg") {
+export default function PetImage(imgSrc) {
   Component.call(this, { html });
 
   const $petImage = this.selected.get('pet-image-src')

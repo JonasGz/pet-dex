@@ -6,6 +6,7 @@ import TextInput from '~src/components/TextInput';
 import './index.scss';
 import PetImage from '~src/components/PetImage';
 import { Router } from 'vanilla-routing';
+import { addData } from '~src/services/localStorage';
 
 const events = ['submit'];
 
@@ -30,6 +31,7 @@ const html = `
 
 export default function PetWeight() {
   Component.call(this, { html, events });
+
   this.initializeComponents();
   this.setupEventListeners();
   this.applyCssClasses();
@@ -43,12 +45,14 @@ PetWeight.prototype = Object.assign(PetWeight.prototype, Component.prototype, {
     const $imageContainer = this.selected.get('image-container');
     const $sliderContainer = this.selected.get('slider-container');
     const $inputsContainer = this.selected.get('input-container');
+    const $petImage = JSON.parse(localStorage.getItem('pet'));
 
     this.setupComponents(
       $footer,
       $imageContainer,
       $sliderContainer,
       $inputsContainer,
+      $petImage,
     );
   },
 
@@ -57,8 +61,9 @@ PetWeight.prototype = Object.assign(PetWeight.prototype, Component.prototype, {
     $imageContainer,
     $sliderContainer,
     $inputsContainer,
+    $petImage,
   ) {
-    this.image = new PetImage();
+    this.image = new PetImage($petImage.name.image);
     this.slider = new RangeSlider();
     this.input = new TextInput({
       placeholder: 'Peso',
@@ -122,6 +127,7 @@ PetWeight.prototype = Object.assign(PetWeight.prototype, Component.prototype, {
       const finalWeightUnit = this.weightUnit();
       const finalWeight = this.weight;
       this.emit('submit', { weight: finalWeight, weightUnit: finalWeightUnit });
+      addData(finalWeight)
       Router.go('/pet-vet')
     });
   },
