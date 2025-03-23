@@ -88,28 +88,7 @@ export default function PetVetPage({ vaccines = [] } = {}) {
   const $neuteredRadio = this.selected.get('neutered-radio');
   const $cardGroup = this.selected.get('card-group');
 
-  const listVaccines = [
-    {
-      id: '1',
-      veterinary: 'Dr octopus',
-      title: 'Antirrábica',
-      date: new Date().toISOString(),
-    },
-    {
-      id: '2',
-      veterinary: 'Dr Felipa',
-      title: 'Raiva',
-      date: new Date(2023, 5, 2).toISOString(),
-    },
-    {
-      id: '3',
-      veterinary: 'Dr octopus',
-      title: 'Raiva',
-      date: new Date(2023, 2, 2).toISOString(),
-    },
-  ]
-
-  this.vaccine = new Vaccine({ vaccines: listVaccines });
+  this.vaccine = new Vaccine({ vaccines });
 
   this.vaccine.mount($cardGroup);
 

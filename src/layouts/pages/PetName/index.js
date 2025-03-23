@@ -42,7 +42,7 @@ export default function PetName() {
 
   const updateButtonVisibility = () => {
     const input = this.input.getValue();
-    const image = this.upload.getImage();
+    const image = this.upload.getImageLocal();
 
     this.button.setIsDisabled(!(input && image));
   };
@@ -52,7 +52,7 @@ export default function PetName() {
   this.input.listen('value:change', updateButtonVisibility);
 
   this.button.listen('click', () => {
-    const image = this.upload.getImage();
+    const image = this.upload.getImageStorage();
     const name = this.input.getValue();
     this.emit('submit', { image, name });
     addData({ image, name })

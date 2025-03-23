@@ -16,8 +16,8 @@
   cursor: pointer;
 
   &__image {
-    height: 12rem;
-    width: 12.4rem;
+    height: 13rem;
+    width: 13.4rem;
     border-radius: 50%;
     align-self: center;
     position: relative;
@@ -42,9 +42,9 @@
     display: block;
     text-align: center;
     font-family: Arial;
-    font-size: fonts.$xs;
+    font-size: fonts.$xxs;
     padding: 2rem 0 0 0;
-    font-weight: fonts.$bold;
+    font-weight: fonts.$regular;
 
   }
 

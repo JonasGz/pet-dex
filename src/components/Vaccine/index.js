@@ -20,6 +20,12 @@ const html = `
         </div>
       </div>
     </div>
+    <div style="display: none" class="vaccine__inputs-add" data-select="add-vaccine-inputs">
+      <input type="date" data-select="vaccine-date" placeholder="Data da vacina" />
+      <input type="text" data-select="vaccine-name" placeholder="Nome da vacina" />
+      <input type="text" data-select="veterinarian" placeholder="Veterinário ou observações" />
+      <button class="vaccine__save-button" data-select="save-vaccine">Salvar</button>
+    </div>
     <div class="vaccine__scroll">
       <div class="vaccine__sections" data-select="group"> </div>
     </div>
@@ -28,13 +34,45 @@ const html = `
 
 export default function Vaccine({ vaccines = [] } = {}) {
   Component.call(this, { html, events });
-
+  const $inputsAddVaccine = this.selected.get('add-vaccine-inputs');
   const $addVaccineContainer = this.selected.get('add-vaccine');
+  const $saveVaccineButton = this.selected.get('save-vaccine');
+
+  const $vaccineDate = this.selected.get('vaccine-date');
+  const $vaccineName = this.selected.get('vaccine-name');
+  const $veterinarian = this.selected.get('veterinarian');
   this.groups = new Map();
   if (vaccines.length) this.loadVaccines(vaccines);
 
   $addVaccineContainer.addEventListener('click', () => {
+    $inputsAddVaccine.style.display = $inputsAddVaccine.style.display === 'block' ? 'none' : 'block';
     this.openDrawer();
+  });
+
+  $saveVaccineButton.addEventListener('click', () => {
+    const date = $vaccineDate.value;
+    const nameVaccine = $vaccineName.value;
+    const veterinary = $veterinarian.value;
+
+    if (!date || !nameVaccine) {
+      // eslint-disable-next-line no-alert
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
+
+    const newVaccine = { id: Date.now(), title: nameVaccine, veterinary, date };
+
+    const group = this.getGroup(newVaccine);
+    if (group) {
+      this.addVaccine(newVaccine, group);
+    } else {
+      this.setGroup(newVaccine);
+    }
+
+    $vaccineDate.value = '';
+    $vaccineName.value = '';
+    $veterinarian.value = '';
+    $inputsAddVaccine.style.display = 'none';
   });
 }
 

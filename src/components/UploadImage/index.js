@@ -1,5 +1,6 @@
 import { Component } from 'pet-dex-utilities';
 import './index.scss';
+import { uploadFileToStorage } from '~src/services/firebase';
 import placeholderImage from './img/placeholder.svg';
 import plusIcon from './img/plus-icon.svg';
 import photoIcon from './img/photo-icon.svg';
@@ -46,11 +47,16 @@ export default function UploadImage() {
     this.reader.readAsDataURL(file);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = async (e) => {
     const inputTarget = e.target;
     const file = inputTarget.files[0];
 
-    if (file) readAndDisplayImage(file);
+    if (file) {
+      readAndDisplayImage(file);
+      this.imageUrl = await uploadFileToStorage(file);
+      if (this.imageUrl) this.emit('value:change', this.imageUrl);
+    }
+      
   };
 
   uploadInput.addEventListener('change', handleInputChange);
@@ -60,8 +66,13 @@ UploadImage.prototype = Object.assign(
   UploadImage.prototype,
   Component.prototype,
   {
-    getImage() {
+    getImageLocal() {
       return this.reader.result;
     },
+
+    getImageStorage() {
+      return this.imageUrl;
+    }
+
   },
 );

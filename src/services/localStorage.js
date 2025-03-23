@@ -1,3 +1,4 @@
+
 export const addData = async (data) => {
   try {
   // eslint-disable-next-line prefer-const

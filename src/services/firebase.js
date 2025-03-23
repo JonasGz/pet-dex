@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from "firebase/auth";
 import { getFirestore, setDoc, doc, getDoc, updateDoc, arrayUnion, getDocs } from "firebase/firestore";
 import { Router } from "vanilla-routing";
@@ -98,6 +99,9 @@ export const login = async (email, password) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const {user} = userCredential;
+    Router.go('/pets')
+    location.reload();
+
     return user
   } catch (error) {
     console.error("Erro ao registrar usuário:", error.message);
@@ -107,9 +111,25 @@ export const login = async (email, password) => {
 
 export const logout = async () => {
   signOut(auth).then(() => {
-    console.log('deslogado')
+    location.reload();
+    Router.go('/')
   })
 }
+
+export const uploadFileToStorage = async (file) => {
+  const storage = getStorage();
+  const storageRef = ref(storage, `petImages/${file.name}`);
+
+  try {
+    const snapshot = await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(snapshot.ref);
+
+    return downloadURL;
+  } catch (error) {
+    console.error('Erro ao enviar imagem:', error);
+    return null;
+  }
+};
 
 export const addPet = async () => {
   if (!auth.currentUser) return;
@@ -117,7 +137,6 @@ export const addPet = async () => {
   const userId = auth.currentUser.uid;
   const userRef = doc(db,'users', userId);
   const newPet = JSON.parse(localStorage.getItem('pet'));
-    
   try {
     await updateDoc(userRef, {
         pets: arrayUnion({
@@ -126,7 +145,6 @@ export const addPet = async () => {
         }),
     });
     localStorage.removeItem('pet')
-    console.log("Pet adicionado com sucesso!");
   } catch (error) {
       console.error("Erro ao adicionar pet:", error);
   }

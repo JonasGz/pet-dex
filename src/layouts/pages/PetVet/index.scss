@@ -181,7 +181,7 @@
   }
 }
 
-@container (min-height: 790px) {
+
   @include breakpoints.from667 {
     .petvet-page {
       &__card-group {
@@ -189,4 +189,3 @@
       }
     }
   }
-}
