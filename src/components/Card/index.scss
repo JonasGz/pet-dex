@@ -9,7 +9,7 @@
   color: colors.$gray600;
 
   background-color: colors.$secondary100;
-  box-shadow: 0 0 0.3rem 0.3rem rgb(236, 239, 242);
+  filter: drop-shadow(0px 1.75px 1px #0C1A4B);
   border-radius: 21px;
   outline: 3px transparent;
   transition: 0.3s;
