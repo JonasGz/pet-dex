@@ -12,6 +12,7 @@ export default function Button({
   text = '',
   isFullWidth = false,
   isDisabled = false,
+  cssClass = '',
 } = {}) {
   Component.call(this, { html, events });
 
@@ -19,6 +20,7 @@ export default function Button({
   this.setIsFullWidth(isFullWidth);
   this.setIsDisabled(isDisabled);
   this.setID(id);
+  this.applyCss(cssClass);
 
   const $button = this.selected.get('button');
 
@@ -63,6 +65,10 @@ Button.prototype = Object.assign(Button.prototype, Component.prototype, {
   enable() {
     this.selected.get('button').removeAttribute('disabled');
     this.emit('enable');
+  },
+
+  applyCss(cssClass = '') {
+    this.selected.get('button').setAttribute('class', `button ${cssClass}`)
   },
 
   setIsDisabled(isDisabled = false) {

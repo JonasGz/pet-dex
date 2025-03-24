@@ -1,0 +1,90 @@
+@use '~styles/colors.scss' as colors;
+@use '~styles/fonts.scss' as fonts;
+
+.card-pet-container {
+  width: 45rem;
+  height: 28rem;
+  background-color: #1B85F3;
+  border-radius: 1.8rem;
+  border: 1px solid #F7FAFC;
+  box-shadow: 0 0 3.75px 0 #0C1A4B;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8rem 0 2rem;
+  align-items: center;
+  font-family: fonts.$primaryFont;
+  color: #fff;
+  cursor: pointer;
+
+  &__infos {
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+  }
+
+  &__name-type {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__name {
+    font-weight: fonts.$semiBold;
+    font-size: fonts.$lg;
+  }
+
+  &__race {
+    font-family: fonts.$fourthFont;
+    font-size: fonts.$sm;
+    font-weight: fonts.$regular;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  &__desc {
+    width: 25rem;
+    font-family: fonts.$fourthFont;
+    font-weight: fonts.$regular;
+  }
+
+  &__img-border1 {
+    width: 20.8rem;
+    height: 20.8rem;
+    border-radius: 50%;
+    background: #ffffff0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__img-border2 {
+    width: 17.2rem;
+    height: 17.2rem;
+    border-radius: 50%;
+    background: #ffffff13;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__img-border3 {
+    width: 13.3rem;
+    height: 13.3rem;
+    border-radius: 50%;
+    background: #ffffff18;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__img {
+    width: 12.4rem;
+    height: 12.4rem;
+    border-radius: 50%;
+  }
+
+}

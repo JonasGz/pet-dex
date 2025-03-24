@@ -6,12 +6,16 @@
   margin: auto;
 
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 
   &__content {
     display: flex;
 
     align-items: center;
-
+    justify-content: center;
     transform: translateX(0);
 
     transition: transform 0.6s ease-in-out;
@@ -35,17 +39,20 @@
       transition: all 450ms ease;
 
       &--active {
-        display: block;
-
+        display: flex;
         z-index: 2;
+
+        &:hover {
+          background-color: #0d6dd3;
+        }
       }
 
       &--prev,
       &--next,
       &--unfocused {
         width: 50%;
-
-        display: block;
+        pointer-events: none;
+        display: flex;
 
         position: absolute;
 

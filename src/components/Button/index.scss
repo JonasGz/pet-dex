@@ -13,9 +13,24 @@
   border-radius: 1.4rem;
 
   transition: 0.3s ease-in-out;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   appearance: none;
+
+  &__slider {
+    background-color: #fff;
+    box-shadow: 0 1px 4px 0 #8B9EB8;
+    color: #1B85F3;
+    width: 5rem;
+    height: 5rem;
+
+    &:hover:not(:disabled) {
+      color: #fff;
+      opacity: 0.8;
+    }
+  }
 
   &--block {
     width: 100%;
@@ -33,4 +48,5 @@
 
     cursor: not-allowed;
   }
+
 }
