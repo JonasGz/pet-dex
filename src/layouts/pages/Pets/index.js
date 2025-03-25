@@ -4,6 +4,7 @@ import Card from '~src/components/Card';
 import Sliding from '~src/components/Sliding';
 import Button from '~src/components/Button';
 import CardPet from '~src/components/CardPet';
+import { Router } from 'vanilla-routing';
 
 const events = ['submit'];
 
@@ -19,6 +20,12 @@ const html = `
       <div class="pets-page__sliding">
         <div data-select="button-prev" class="pets-page__button-prev"></div><div data-select="slider" class="pets-page__slider"></div><div data-select="button-next" class="pets-page__button-next"></div>
       </div>
+      <div class="pets-page__footer">
+        <div class="pets-page__footer-desc" data-select="footer-desc">
+          Faltando alguem? Crie o perfil do seu pet e deixe o nosso site com o focinho do seu filhote!
+        </div>
+        <div class="pets-page__button-footer" data-select="button-footer"></div>
+      </div>
     <div class="loading" data-select="loading" id="loading">Carregando pets...</div>
     </div>
     
@@ -31,6 +38,7 @@ export default function Pets() {
   const $slider = this.selected.get("slider");
   const $buttonPrev = this.selected.get("button-prev");
   const $buttonNext = this.selected.get("button-next");
+  const $buttonFooter = this.selected.get("button-footer");
   const $loading = this.selected.get("loading");
   const petsDb = JSON.parse(localStorage.getItem('pets'))
   const user = localStorage.getItem('hasUser')
@@ -51,7 +59,6 @@ export default function Pets() {
     prev.applyCss('button__slider')
     next.applyCss('button__slider')
 
-
     const arrayCard = [];
     petsDb.map((pet) => {
       $loading.style.display = "none";
@@ -68,6 +75,20 @@ export default function Pets() {
     next.mount($buttonNext);
     prev.listen('click', () => sliding.previous());
     next.listen('click', () => sliding.next());
+
+    const button = new Button({
+      text: 'Cadastrar pet',
+      isDisabled: false,
+      isFullWidth: true,
+    })
+
+    button.setIsFullWidth(true)
+
+    $buttonFooter.addEventListener('click', () => {
+      Router.go('/pet-name')
+    })
+
+    button.mount($buttonFooter)
   
   }
 

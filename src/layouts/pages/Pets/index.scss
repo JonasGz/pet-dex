@@ -48,6 +48,28 @@
     height: 29rem;
     display: flex;
   }
+
+  &__footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  &__button-footer {
+    width: 100%;
+    max-width: 42rem;
+  }
+
+  &__footer-desc {
+    color: #808B9A;
+    font-family: fonts.$primaryFont;
+    font-size: 1.8rem;
+    text-align: center;
+    max-width: 50rem;
+  }
 }
 
 @include breakpoints.from1024 {
