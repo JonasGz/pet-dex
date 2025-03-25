@@ -1,18 +1,20 @@
+@use '~styles/breakpoints.scss' as breakpoints;
 @use '~styles/colors.scss' as colors;
 @use '~styles/fonts.scss' as fonts;
 
 .card-pet-container {
-  width: 45rem;
-  height: 28rem;
+  max-width: 45rem;
+  height: 29rem;
   background-color: #1B85F3;
-  border-radius: 1.8rem;
+  border-radius: 2rem;
   border: 1px solid #F7FAFC;
   display: flex;
-  justify-content: space-between;
-  padding: 0 8rem 0 2rem;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   font-family: fonts.$primaryFont;
   color: #fff;
+  text-align: center;
   cursor: pointer;
 
   &__infos {
@@ -39,7 +41,7 @@
   }
 
   &__info {
-    display: flex;
+    display: none;
     flex-direction: row;
     gap: 1rem;
   }
@@ -87,3 +89,62 @@
   }
 
 }
+
+@include breakpoints.from1280 {
+  .card-pet-container {
+    max-width: 57rem !important;
+    flex-direction: row !important;
+    justify-content: space-between;
+    padding: 0 3rem 0 2rem;
+    &__infos {
+      width: 25rem;
+    }
+    
+    &__info {
+      display: block !important;
+    }
+  }
+}
+
+@include breakpoints.from1024 {
+  .card-pet-container {
+    width: 25rem;
+    height: 28rem;
+    background-color: #1B85F3;
+    border-radius: 1.8rem;
+    border: 1px solid #F7FAFC;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: fonts.$primaryFont;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+
+@include breakpoints.from667 {
+  .card-pet-container {
+    width: 25rem;
+    height: 28rem;
+    background-color: #1B85F3;
+    border-radius: 1.8rem;
+    border: 1px solid #F7FAFC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: fonts.$primaryFont;
+    color: #fff;
+    cursor: pointer;
+    flex-direction: column;
+
+    &__info {
+      display: none;
+      flex-direction: row;
+      gap: 1rem;
+    }
+  }
+
+  
+}
+
+
