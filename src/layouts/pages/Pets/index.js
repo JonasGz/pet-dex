@@ -9,7 +9,13 @@ const events = ['submit'];
 
 const html = `
   <div class='pets-page'>
+  
+
     <div class="pets-page__container" data-select="container">
+      <div class="pets-page__header-page">
+        <div class="pets-page__title">Meu Pets</div>
+        <div class="pets-page__subtitle">Veja todos os seus Pets</div>
+      </div>
       <div class="pets-page__sliding">
         <div data-select="button-prev" class="pets-page__button-prev"></div><div data-select="slider" class="pets-page__slider"></div><div data-select="button-next" class="pets-page__button-next"></div>
       </div>
