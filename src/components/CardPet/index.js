@@ -8,7 +8,7 @@ const html = `
     <div class="card-pet-container__infos">
       <div class="card-pet-container__name-type">
         <strong class="card-pet-container__name" data-select="card-pet-name">Snow</strong>
-        <strong class="card-pet-container__type" data-select="card-pet-race">Cat</strong>
+        <strong class="card-pet-container__type" data-select="card-pet-type">Cat</strong>
       </div>
       
       <div class="card-pet-container__info" data-select="card-pet-info-age">
@@ -38,7 +38,7 @@ CardPet.prototype = Object.assign(CardPet.prototype, Component.prototype, {
     this.selected.get('card-pet-name').textContent = text;
   },
   setType(type) {
-    this.selected.get('card-pet-race').textContent = type;
+    this.selected.get('card-pet-type').textContent = type;
   },
   setSrc(url) {
     this.selected.get('card-pet-img').src = url;

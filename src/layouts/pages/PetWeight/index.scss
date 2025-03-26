@@ -45,13 +45,11 @@
     font-size: 1.1rem;
     font-weight: fonts.$regular;
 
-    // margin-top: 1.6rem;
   }
 
   &__slider-container {
     max-width: 100%;
 
-    // margin-top: 3rem;
   }
 
   &__value {
@@ -94,11 +92,6 @@
   .pet-weight-page {
     align-items: flex-start;
 
-
-    &__slider-container {
-      // padding-top: 2rem;
-    }
-
     &__title {
       font-size: fonts.$sm;
       font-weight: fonts.$medium;
@@ -108,10 +101,6 @@
       font-size: fonts.$xs;
     }
 
-    &__inputs {
-      // margin-top: 3rem;
-      // margin-bottom: 2rem;
-    }
 
     &__input-container {
       margin-right: 1rem;
@@ -129,10 +118,6 @@
 
 @include breakpoints.from1280 {
   .pet-weight-page {
-    &__image-container {
-      // margin-top: 4rem;
-      // margin-bottom: 4rem;
-    }
 
     &__title {
       font-size: fonts.$md;

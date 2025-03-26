@@ -68,7 +68,8 @@ Button.prototype = Object.assign(Button.prototype, Component.prototype, {
   },
 
   applyCss(cssClass = '') {
-    this.selected.get('button').setAttribute('class', `button ${cssClass}`)
+    const button = this.selected.get('button')
+    button.setAttribute('class', `${button.getAttribute('class')} ${cssClass}`)
   },
 
   setIsDisabled(isDisabled = false) {

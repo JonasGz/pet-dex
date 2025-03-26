@@ -34,6 +34,11 @@
     font-size: fonts.$lg;
   }
 
+  &__type {
+    color: #ffffffbb;
+    font-size: fonts.$xs;
+  }
+
   &__race {
     font-family: fonts.$fourthFont;
     font-size: fonts.$sm;

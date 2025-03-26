@@ -1,12 +1,12 @@
 import { Component } from 'pet-dex-utilities';
 import { Router } from 'vanilla-routing';
+import { addData } from '~src/services/localStorage';
+import PetProgress from '~src/components/PetProgress';
 import TextInput from '../../../components/TextInput';
 import UploadImage from '../../../components/UploadImage';
 import Button from '../../../components/Button';
-
 import './index.scss';
-import { addData } from '~src/services/localStorage';
-import PetProgress from '~src/components/PetProgress';
+
 
 const events = ['submit'];
 
