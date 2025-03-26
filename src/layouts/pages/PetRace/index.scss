@@ -1,12 +1,12 @@
 @use '~styles/colors.scss' as colors;
 @use '~styles/breakpoints.scss' as breakpoints;
 
-.pet-race-page {
-  min-height: 100%;
-
-  display: grid;
-
-  place-items: center;
+.pet-race {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+  flex-direction: column;
 
   &__description {
     max-width: 33.5rem;

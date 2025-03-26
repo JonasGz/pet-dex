@@ -5,6 +5,9 @@
 .pet-name {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
 
   &__container {
     width: 100%;
@@ -41,7 +44,6 @@
 
     justify-content: center;
 
-    margin-top: auto;
   }
 
   &__button {

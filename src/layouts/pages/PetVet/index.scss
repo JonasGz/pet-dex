@@ -3,13 +3,20 @@
 @use '~styles/breakpoints' as breakpoints;
 
 .petvet-page {
-  max-width: 60rem;
   display: flex;
   flex-direction: column;
-
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
   align-items: center;
 
+  &__progress {
+    width: 100%;
+  }
+
   &__content {
+  max-width: 60rem;
+
     margin-bottom: 2.4rem;
   }
 
@@ -121,8 +128,6 @@
     display: flex;
 
     justify-content: center;
-
-    margin-top: auto;
   }
 
   &__button {

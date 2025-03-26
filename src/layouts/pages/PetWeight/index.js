@@ -7,11 +7,14 @@ import './index.scss';
 import PetImage from '~src/components/PetImage';
 import { Router } from 'vanilla-routing';
 import { addData } from '~src/services/localStorage';
+import PetProgress from '~src/components/PetProgress';
 
 const events = ['submit'];
 
 const html = `
   <div class="pet-weight-page">
+  <div class="pet-weight-page__progress" data-select="pet-progress"></div>
+
     <div class="pet-weight-page__content" data-select="container">
       <div data-select="image-container"></div>
 
@@ -31,6 +34,10 @@ const html = `
 
 export default function PetWeight() {
   Component.call(this, { html, events });
+  const $petProgress = this.selected.get('pet-progress')
+
+  this.progress = new PetProgress("Peso", "4");
+  this.progress.mount($petProgress)
 
   this.initializeComponents();
   this.setupEventListeners();

@@ -1,0 +1,86 @@
+@use '~styles/breakpoints.scss' as breakpoints;
+@use '~styles/colors.scss' as colors;
+@use '~styles/fonts.scss' as fonts;
+
+.pet-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: fonts.$primaryFont;
+
+  &__container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  &__container-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: center;
+  }
+
+  &__title {
+    font-weight: fonts.$semiBold;
+    color: #39434F;
+    font-size: 1.6rem;
+  }
+
+  &__subtitle {
+    font-weight: fonts.$regular;
+    color: #808B9A;
+    font-size: 1.4rem;
+  }
+
+  &__container-steps {
+    font-size: 1.2rem;
+    color: #39434F;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: center;
+  }
+
+  &__step {
+    font-weight: fonts.$regular;
+  }
+
+  &__step-current {
+    font-weight: bold;
+  }
+
+  &__container-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__bar1 {
+    height: 0.7rem;
+    border-radius: 1rem;
+    width: 25rem;
+    background-color: #FFC542;
+  }
+
+  &__bar2 {
+    height: 0.3rem;
+    width: 100%;
+    background-color: #ECEFF2;
+  }
+  
+}
+
+@include breakpoints.from1280 {
+
+}
+
+@include breakpoints.from1024 {
+
+}
+
+@include breakpoints.from667 {
+  
+}
+
+

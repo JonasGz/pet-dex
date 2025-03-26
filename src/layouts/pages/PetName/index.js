@@ -6,11 +6,13 @@ import Button from '../../../components/Button';
 
 import './index.scss';
 import { addData } from '~src/services/localStorage';
+import PetProgress from '~src/components/PetProgress';
 
 const events = ['submit'];
 
 const html = `
   <div class='pet-name'>
+  <div data-select="pet-progress"></div>
     <div class='pet-name__container'>
       <div class='pet-name__image' data-select='upload-image-container'></div>
       <h1 class='pet-name__title'>Qual o nome do seu bichinho?</h1>
@@ -25,9 +27,13 @@ const html = `
 export default function PetName() {
   Component.call(this, { html, events });
 
+  const $petProgress = this.selected.get('pet-progress')
   const $inputContainer = this.selected.get('input-container');
   const $uploadImage = this.selected.get('upload-image-container');
   const $buttonContainer = this.selected.get('button-container');
+
+  this.progress = new PetProgress("Nome", "1");
+  this.progress.mount($petProgress)
 
   this.input = new TextInput({
     placeholder: 'Nome do Pet',

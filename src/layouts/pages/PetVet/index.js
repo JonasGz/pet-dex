@@ -7,6 +7,7 @@ import Vaccine from '~src/components/Vaccine';
 import { Router } from 'vanilla-routing';
 import { addData } from '~src/services/localStorage';
 import { addPet, getPets } from '~src/services/firebase';
+import PetProgress from '~src/components/PetProgress';
 import cuidadosEspeciais from './images/cuidadosEspeciais.svg';
 import estetoscopio from './images/estetoscopio.svg';
 
@@ -14,6 +15,8 @@ import './index.scss';
 
 const html = `
   <div data-select="container" class="petvet-page">
+    <div class="petvet-page__progress" data-select="pet-progress"></div>
+
     <div class="petvet-page__content">
       <div class="petvet-page__header">
         <p class="petvet-page__header--text">Conte-nos um pouco mais do seu animal</p>
@@ -82,11 +85,15 @@ function createAndMount({ name, text, mountTo, value, borderless }) {
 
 export default function PetVetPage({ vaccines = [] } = {}) {
   Component.call(this, { html, events });
+  const $petProgress = this.selected.get('pet-progress')
   const $footer = this.selected.get('footer');
   const $specialCareRadio = this.selected.get('special-care-radio');
   const $specialCareText = this.selected.get('special-care-text');
   const $neuteredRadio = this.selected.get('neutered-radio');
   const $cardGroup = this.selected.get('card-group');
+
+  this.progress = new PetProgress("Veterinário", "5");
+  this.progress.mount($petProgress)
 
   this.vaccine = new Vaccine({ vaccines });
 
