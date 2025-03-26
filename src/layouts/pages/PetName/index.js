@@ -12,7 +12,7 @@ const events = ['submit'];
 
 const html = `
   <div class='pet-name'>
-  <div data-select="pet-progress"></div>
+  <div class="pet-name__progress" data-select="pet-progress"></div>
     <div class='pet-name__container'>
       <div class='pet-name__image' data-select='upload-image-container'></div>
       <h1 class='pet-name__title'>Qual o nome do seu bichinho?</h1>
