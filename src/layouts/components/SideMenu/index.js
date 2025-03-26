@@ -1,4 +1,6 @@
 import { Component } from 'pet-dex-utilities';
+import { logout } from '~src/services/firebase';
+import AvatarButton from '~src/components/AvatarButton';
 import PetAvatar from '../../../components/PetAvatar';
 import petUrl from '../../../images/pet-dex.svg';
 import configuracoes from './images/configuracoes.svg';
@@ -11,9 +13,8 @@ import perfil from './images/perfil.svg';
 import petdex from './images/petdex.svg';
 import register from './images/register.svg';
 import addpet from './images/addpet.svg';
-
 import './index.scss';
-import { logout } from '~src/services/firebase';
+
 
 const html = `
   <nav class="side-menu-nav">
@@ -30,7 +31,7 @@ const html = `
     <div class="side-menu-content">
       <div class="side-menu-content__line"></div>
       <div class="side-menu-content__yourpet">
-        <h2 class="side-menu-content__title-yourpet">Seu Pet</h2>
+        <h2 class="side-menu-content__title-yourpet">Meus Pets</h2>
         <div class="side-menu-content__avatars-yourpet"  data-select="avatar-container"></div>
       </div>
       <div class="side-menu-content__line"></div>
@@ -43,7 +44,7 @@ const html = `
           </li>
           <li>
             <a data-vanilla-route-link="spa" class="side-menu-content__menuitens" href="/pets">
-              <img src="${meusPets}" alt="Meus Pets">Meus Pets
+              <img src="${meusPets}">Meus Pets
             </a>
           </li>
           <li>
@@ -78,14 +79,25 @@ export default function SideMenu() {
   const $container = this.selected.get('avatar-container');
   const $register = this.selected.get("register");
   const $login = this.selected.get("login");
-  const hasUser = localStorage.getItem("hasUser")
+  const hasUser = localStorage.getItem("hasUser");
+  const petsDb = JSON.parse(localStorage.getItem('pets'));
+  
+  const addPet = new AvatarButton();
+  addPet.mount($container)
 
   if(hasUser === "true") {
     $register.style.display = "none"
     $login.style.display = "none"
-  }  
+    
+    petsDb.forEach((pet) => {
+      const avatar = new PetAvatar({id: Date.now(), title: pet.name.name, imgSrc: pet.name.image})
+     avatar.mount($container)
+    });
 
-  const inputIdUser = 1; // ID simulando input usuário em componente futuro
+  } 
+  
+
+  // const inputIdUser = 1;
   // Para renderização do componente pets avatar, json-server deve está em execução.
   // UserService.getPets(inputIdUser).then((response) => {
   //   response.forEach((pet) => {

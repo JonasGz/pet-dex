@@ -135,8 +135,14 @@
     padding: 1.2rem;
 
     &--active {
-      background-color: rgb(0, 29, 49);
-      border-radius: 2rem;
+      background-color: #D1E6FF;
+      border-radius: 0.8rem;
+      width: 100%;
+
+      & a {
+        color: colors.$primary600;
+        font-weight: fonts.$medium;
+      }
     }
   }
 }
