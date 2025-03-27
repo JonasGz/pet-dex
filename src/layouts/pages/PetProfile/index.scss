@@ -1,0 +1,196 @@
+@use '~styles/breakpoints.scss' as breakpoints;
+@use '~styles/colors.scss' as colors;
+@use '~styles/fonts.scss' as fonts;
+
+.pet-profile-page {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-family: fonts.$primaryFont;
+  padding: 0 3rem 0 3rem;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    // justify-content: space-around;
+    width: 100%;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  &__header-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: #808B9A;
+    padding: 1.4rem 0 0 2.4rem;
+  }
+
+  &__header-title {
+    font-family: fonts.$sixthFont;
+    font-size: 2.8rem;
+    color: #39434F;
+    font-weight: fonts.$bold;
+  }
+
+  &__content-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  &__infos {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  &__title {
+    color: #39434F;
+    font-weight: fonts.$semiBold;
+    font-size: 2.2rem;
+    max-width: 18rem;
+  }
+
+  &__subtitle {
+    font-size: 1.6rem;
+    color: #808B9A;
+  }
+
+  &__avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 14.2rem;
+    height: 14.2rem;
+    border-radius: 50%;
+    background-color: #ECEFF2;
+  }
+
+  &__img {
+    width: 11.8rem;
+    height: 11.8rem;
+    border-radius: 50%;
+  }
+
+ 
+
+  &__message {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    font-family: fonts.$fourthFont;
+  }
+
+  &__message-title {
+    font-size: 1.8rem;
+    color: #39434F;
+    font-weight: fonts.$semiBold;
+  }
+
+  &__message-desc {
+    color:#606873;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+  }
+
+  &__options {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  &__peso {
+    display: flex;
+    justify-content: space-between;
+    font-family: fonts.$fourthFont;
+    
+  }
+
+  &__peso-title {
+    color:#606873;
+    font-size: 1.6rem;
+  }
+
+  &__peso-value {
+    color:#39434F;
+    font-weight: fonts.$semiBold;
+  }
+
+  &__divisor {
+    height: 1px;
+    width: 100%;
+    background-color: #ECEFF2;
+  }
+
+  &__neutered {
+    display: flex;
+    justify-content: space-between;
+    font-family: fonts.$fourthFont;
+    
+  }
+
+  &__neutered-title {
+    color:#606873;
+    font-size: 1.6rem;
+  }
+
+  &__neutered-value {
+    color:#39434F;
+    font-weight: fonts.$semiBold;
+  }
+
+  &__birthday {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: fonts.$fourthFont;
+  }
+
+  &__birthday-left {
+    display: flex;
+    gap: 1.4rem;
+    align-items: center;
+  }
+
+  &__birthday-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__birthday-info-title {
+    color:#606873;
+    font-size: 1.6rem;
+  }
+
+  &__birthday-info-desc {
+    color:#39434F;
+    font-size: 1.6rem;
+    font-weight: fonts.$semiBold;
+  }
+
+  &__birthday-value {
+    color:#39434F;
+    font-weight: fonts.$semiBold;
+  }
+
+}
+
+@include breakpoints.from1280 {
+
+}
+
+@include breakpoints.from1024 {
+
+}
+
+
+@include breakpoints.from667 {
+}
