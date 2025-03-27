@@ -179,8 +179,9 @@ export default function PetVetPage({ vaccines = [] } = {}) {
     addData(form)
     await addPet()
     await getPets();
-    window.location.reload()
     Router.go('/pets')
+
+    window.location.reload()
   };
 
   this.button.listen('click', emitForm);

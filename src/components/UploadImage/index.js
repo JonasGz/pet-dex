@@ -50,7 +50,6 @@ export default function UploadImage() {
   const handleInputChange = async (e) => {
     const inputTarget = e.target;
     const file = inputTarget.files[0];
-
     if (file) {
       readAndDisplayImage(file);
       this.imageUrl = await uploadFileToStorage(file);

@@ -118,7 +118,7 @@ export const logout = async () => {
 
 export const uploadFileToStorage = async (file) => {
   const storage = getStorage();
-  const storageRef = ref(storage, `petImages/${file.name}`);
+  const storageRef = ref(storage, `petImages/${Date.now()}`);
 
   try {
     const snapshot = await uploadBytes(storageRef, file);
