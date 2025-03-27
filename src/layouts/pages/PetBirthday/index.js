@@ -1,12 +1,12 @@
 import { Component } from 'pet-dex-utilities';
 import PetImage from '~src/components/PetImage';
 import { Router } from 'vanilla-routing';
-import TextInput from '../../../components/TextInput';
-import Button from '../../../components/Button';
-
-import './index.scss';
 import { addData } from '~src/services/localStorage';
 import PetProgress from '~src/components/PetProgress';
+import TextInput from '../../../components/TextInput';
+import Button from '../../../components/Button';
+import './index.scss';
+
 
 const events = ['submit'];
 
@@ -42,7 +42,7 @@ export default function PetBirthday() {
     type: 'number',
   });
 
-  this.petImage = new PetImage(petImage.name.image);
+  this.petImage = new PetImage(petImage.name.image.imageLocal);
   this.button = new Button({
     text: 'Continuar',
     isFullWidth: true,

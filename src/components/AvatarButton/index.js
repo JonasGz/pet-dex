@@ -4,7 +4,7 @@ import './index.scss';
 import cross from './images/cross.svg';
 
 const html = `
-<div class="avatar-button">
+<div data-select="avatar-button" class="avatar-button">
   <a href="#" class="avatar-button__container" data-select="avatar-button" title="Adicionar amigo">
     <div class="avatar-button__bg">
       <img class="avatar-button__cross" src="${cross}" alt="cross"/>

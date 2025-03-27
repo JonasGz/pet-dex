@@ -7,7 +7,7 @@ const events = ['purchase'];
 const html = `
   <div class="pet-progress">
     <div class="pet-progress__container">
-      <div class="pet-progress__arrow">
+      <div data-select="arrow-back" class="pet-progress__arrow">
       ${arrow}</div>
       <div class="pet-progress__container-title">
         <div class="pet-progress__title">Petperfil</div>

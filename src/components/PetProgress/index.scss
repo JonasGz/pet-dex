@@ -46,6 +46,10 @@
     font-weight: fonts.$regular;
   }
 
+  &__arrow {
+    opacity: 0;
+  }
+
   &__step-current {
     font-weight: bold;
   }

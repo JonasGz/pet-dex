@@ -62,7 +62,7 @@ export default function Pets() {
     const arrayCard = [];
     petsDb.map((pet) => {
       $loading.style.display = "none";
-      this.card = new CardPet(pet.name.name, pet.petRace, pet.name.image);
+      this.card = new CardPet(pet.name.name, pet.petRace, pet.name.image.imageStorage);
       arrayCard.push(this.card.elements[0]);
     })
 

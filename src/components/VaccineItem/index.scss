@@ -14,7 +14,7 @@
   font-weight: fonts.$medium;
   line-height: 2.4;
 
-  padding: 2rem;
+  padding: 1.4rem 1.4rem;
 
   border: 1px solid colors.$gray150;
 
@@ -30,6 +30,10 @@
     gap: 0.8rem;
 
     align-items: center;
+  }
+
+  &__vet {
+    line-height: 2rem;
   }
 
   &__divider {

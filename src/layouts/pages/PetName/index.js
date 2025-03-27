@@ -58,7 +58,10 @@ export default function PetName() {
   this.input.listen('value:change', updateButtonVisibility);
 
   this.button.listen('click', () => {
-    const image = this.upload.getImageStorage();
+    const image = {
+      imageLocal: this.upload.getImageLocal(),
+      imageStorage: this.upload.getImageStorage()
+    }
     const name = this.input.getValue();
     this.emit('submit', { image, name });
     addData({ image, name })

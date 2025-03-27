@@ -70,7 +70,7 @@ PetWeight.prototype = Object.assign(PetWeight.prototype, Component.prototype, {
     $inputsContainer,
     $petImage,
   ) {
-    this.image = new PetImage($petImage.name.image);
+    this.image = new PetImage($petImage.name.image.imageLocal);
     this.slider = new RangeSlider();
     this.input = new TextInput({
       placeholder: 'Peso',

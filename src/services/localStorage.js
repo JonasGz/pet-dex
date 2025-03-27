@@ -8,6 +8,7 @@ export const addData = async (data) => {
       localStorage.setItem('pet', JSON.stringify(newPet));
       return;
     }
+    
     if(!newPet.petRace) {
       newPet.petRace = data;
       localStorage.setItem('pet', JSON.stringify(newPet));
@@ -32,10 +33,16 @@ export const addData = async (data) => {
 
     }
 
-
   } catch(error) {
     console.error (error.message)
   }
-  
 
+}
+
+export const findPetById = (idUrl) => {
+  const pets = JSON.parse(localStorage.getItem("pets")) || [];
+
+  const petSelecionado = pets.find(pet => pet.id === idUrl);
+
+  return petSelecionado;
 }

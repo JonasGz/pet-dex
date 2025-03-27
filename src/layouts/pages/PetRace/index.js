@@ -34,11 +34,12 @@ export default function PetRace() {
   this.progress = new PetProgress("Tipo", "2");
   this.progress.mount($petProgress)
 
+  this.progress.selected.get('arrow-back').addEventListener('click', () => Router.back())
+
   this.input = new TextInput({
     placeholder: 'Gato',
   });
-
-  this.petImage = new PetImage(petImage.name.image);
+  this.petImage = new PetImage(petImage.name.image.imageLocal);
   this.button = new Button({
     text: 'Continuar',
     isFullWidth: true,

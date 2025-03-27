@@ -32,8 +32,13 @@ const html = `
 
 export default function Navigation() {
   Component.call(this, { html });
-  const $exit = this.selected.get('exit');
-  $exit.addEventListener('click', () => logout())
+  const hasUser = localStorage.getItem("hasUser");
+
+  if(hasUser === 'true') {
+    const $exit = this.selected.get('exit');
+    $exit.addEventListener('click', () => logout())
+  }
+ 
 }
 
 Navigation.prototype = Object.assign(Navigation.prototype, Component.prototype);

@@ -3,6 +3,8 @@ import VaccineGroup from '../VaccineGroup';
 import vaccineUrl from './images/vaccine.svg';
 import addVaccineUrl from './images/plus.svg';
 import './index.scss';
+import TextInput from '../TextInput';
+import Button from '../Button';
 
 const events = ['drawer:open', 'group:add', 'group:change', 'group:remove'];
 
@@ -21,10 +23,7 @@ const html = `
       </div>
     </div>
     <div style="display: none" class="vaccine__inputs-add" data-select="add-vaccine-inputs">
-      <input type="date" data-select="vaccine-date" placeholder="Data da vacina" />
-      <input type="text" data-select="vaccine-name" placeholder="Nome da vacina" />
-      <input type="text" data-select="veterinarian" placeholder="Veterinário ou observações" />
-      <button class="vaccine__save-button" data-select="save-vaccine">Salvar</button>
+      
     </div>
     <div class="vaccine__scroll">
       <div class="vaccine__sections" data-select="group"> </div>
@@ -36,23 +35,46 @@ export default function Vaccine({ vaccines = [] } = {}) {
   Component.call(this, { html, events });
   const $inputsAddVaccine = this.selected.get('add-vaccine-inputs');
   const $addVaccineContainer = this.selected.get('add-vaccine');
-  const $saveVaccineButton = this.selected.get('save-vaccine');
 
-  const $vaccineDate = this.selected.get('vaccine-date');
-  const $vaccineName = this.selected.get('vaccine-name');
-  const $veterinarian = this.selected.get('veterinarian');
+  const vaccnineDate = new TextInput({
+    placeholder: '20/03/2025',
+    type: 'date',
+  })
+
+  const vaccnineName = new TextInput({
+    placeholder: 'Nome da vacina',
+    type: 'text'
+  })
+
+  const vaccineVeterinarian = new TextInput({
+    placeholder: 'Dra Vitória Pascoal',
+    type: 'text'
+  })
+
+  const buttonAddVaccine = new Button({
+    text: 'Salvar',
+    isFullWidth: false,
+  })
+
+
+  vaccnineDate.mount($inputsAddVaccine)
+  vaccnineName.mount($inputsAddVaccine)
+  vaccineVeterinarian.mount($inputsAddVaccine)
+  buttonAddVaccine.mount($inputsAddVaccine)
+
+
   this.groups = new Map();
   if (vaccines.length) this.loadVaccines(vaccines);
 
   $addVaccineContainer.addEventListener('click', () => {
-    $inputsAddVaccine.style.display = $inputsAddVaccine.style.display === 'block' ? 'none' : 'block';
+    $inputsAddVaccine.style.display = $inputsAddVaccine.style.display === 'flex' ? 'none' : 'flex';
     this.openDrawer();
   });
 
-  $saveVaccineButton.addEventListener('click', () => {
-    const date = $vaccineDate.value;
-    const nameVaccine = $vaccineName.value;
-    const veterinary = $veterinarian.value;
+  buttonAddVaccine.listen('click', () => {
+    const date = vaccnineDate.getValue();
+    const nameVaccine = vaccnineName.getValue();
+    const veterinary = vaccineVeterinarian.getValue();
 
     if (!date || !nameVaccine) {
       // eslint-disable-next-line no-alert
@@ -69,9 +91,9 @@ export default function Vaccine({ vaccines = [] } = {}) {
       this.setGroup(newVaccine);
     }
 
-    $vaccineDate.value = '';
-    $vaccineName.value = '';
-    $veterinarian.value = '';
+    vaccnineDate.setValue('')
+    vaccnineName.setValue('')
+    vaccineVeterinarian.setValue('')
     $inputsAddVaccine.style.display = 'none';
   });
 }

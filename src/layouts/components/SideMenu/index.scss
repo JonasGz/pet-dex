@@ -45,9 +45,14 @@
     height: 2rem;
   }
 
+  &__logout {
+    cursor: pointer;
+  }
+
   &__exitmenu {
     width: 2.9rem;
     height: 2.4rem;
+    cursor: pointer;
   }
 }
 
