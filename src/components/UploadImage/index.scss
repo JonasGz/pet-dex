@@ -1,6 +1,44 @@
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .container-upload-image {
   position: relative;
   aspect-ratio: 1 / 1;
+
+  &__loader {
+    width: 24px;
+    height: 24px;
+
+    display: none; /* Começa escondido */
+
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top-color: rgb(76, 175, 80); // Cor verde para indicar atividade
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    animation: spin 1s linear infinite;
+
+    &__loader.hidden {
+      display: none;
+    }
+
+    &__loader:not(.hidden) {
+      display: block;
+    }
+  }
+
+  &__error-message {
+    color: rgb(255, 68, 68);
+    text-align: center;
+    font-size: 12px;
+
+    margin-top: 8px;
+  }
 
   &__label {
     cursor: pointer;

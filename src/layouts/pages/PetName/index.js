@@ -7,7 +7,6 @@ import UploadImage from '../../../components/UploadImage';
 import Button from '../../../components/Button';
 import './index.scss';
 
-
 const events = ['submit'];
 
 const html = `
@@ -27,13 +26,13 @@ const html = `
 export default function PetName() {
   Component.call(this, { html, events });
 
-  const $petProgress = this.selected.get('pet-progress')
+  const $petProgress = this.selected.get('pet-progress');
   const $inputContainer = this.selected.get('input-container');
   const $uploadImage = this.selected.get('upload-image-container');
   const $buttonContainer = this.selected.get('button-container');
 
-  this.progress = new PetProgress("Nome", "1");
-  this.progress.mount($petProgress)
+  this.progress = new PetProgress('Nome', '1');
+  this.progress.mount($petProgress);
 
   this.input = new TextInput({
     placeholder: 'Nome do Pet',
@@ -57,15 +56,40 @@ export default function PetName() {
   this.upload.listen('value:change', updateButtonVisibility);
   this.input.listen('value:change', updateButtonVisibility);
 
-  this.button.listen('click', () => {
-    const image = {
-      imageLocal: this.upload.getImageLocal(),
-      imageStorage: this.upload.getImageStorage()
+  this.button.listen('click', async () => {
+    try {
+      const name = this.input.getValue();
+      const imageLocal = this.upload.getImageLocal();
+
+      if (!name || !imageLocal) {
+        // eslint-disable-next-line no-alert
+        alert('Por favor, preencha o nome e selecione uma imagem');
+        return;
+      }
+
+      this.button.setIsDisabled(true);
+      this.button.setText('Enviando...');
+
+      const imageStorage = await this.upload.uploadImageToStorage();
+
+      if (!imageStorage) {
+        throw new Error('Falha no upload da imagem');
+      }
+
+      addData({
+        image: {
+          imageLocal,
+          imageStorage,
+        },
+        name,
+      });
+
+      Router.go('/pet-race');
+    } catch (error) {
+      this.button.setIsDisabled(false);
+      this.button.setText('Continuar');
+      throw new Error(error);
     }
-    const name = this.input.getValue();
-    this.emit('submit', { image, name });
-    addData({ image, name })
-    Router.go('/pet-race')
   });
 
   this.upload.mount($uploadImage);

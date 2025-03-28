@@ -173,7 +173,6 @@ export const uploadFileToStorage = async (file) => {
 
 export const addPet = async () => {
   if (!auth.currentUser) return;
-  console.log('entrou no addPet');
   const userId = auth.currentUser.uid;
   const userRef = doc(db, 'users', userId);
   const newPet = JSON.parse(localStorage.getItem('pet'));
@@ -200,7 +199,6 @@ export const addPet = async () => {
         ...newPetData,
       }),
     });
-    console.log('executou addPet');
     localStorage.removeItem('pet');
   } catch (error) {
     console.error('Erro ao adicionar pet:', error);
