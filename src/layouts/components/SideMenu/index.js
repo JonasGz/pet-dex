@@ -1,16 +1,15 @@
 import { Component } from 'pet-dex-utilities';
 import { logout } from '~src/services/firebase';
 import AvatarButton from '~src/components/AvatarButton';
+import { Router } from 'vanilla-routing';
 import PetAvatar from '../../../components/PetAvatar';
 import petUrl from '../../../images/pet-dex.svg';
-import configuracoes from './images/configuracoes.svg';
 import conta from './images/conta.svg';
 import exit from './images/exit.svg';
 import exitMenu from './images/exitmenu.svg';
 import meusPets from './images/meuspets.svg';
 import notificacoes from './images/notifications.svg';
 import perfil from './images/perfil.svg';
-import petdex from './images/petdex.svg';
 import register from './images/register.svg';
 import addpet from './images/addpet.svg';
 import './index.scss';
@@ -75,7 +74,11 @@ export default function SideMenu() {
   const petsDb = JSON.parse(localStorage.getItem('pets'));
   
   const addPet = new AvatarButton();
+  const $avatarAddPet = addPet.selected.get('avatar-button')
   addPet.mount($container)
+  addPet.listen('click', () => {
+    Router.go('/pet-name')
+  })
 
   if(hasUser === "true") {
     $register.style.pointerEvents = "none"
@@ -98,6 +101,9 @@ export default function SideMenu() {
 
     $myPets.style.pointerEvents = "none"
     $myPets.style.opacity = "0.6"
+
+    $avatarAddPet.style.pointerEvents = 'none'
+    $avatarAddPet.style.opacity = "0.6"
 
     addPet.selected.get('avatar-button').style.pointerEvents = 'none';
     addPet.selected.get('avatar-button').style.opacity = '0.6';
