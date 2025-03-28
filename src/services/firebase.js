@@ -17,7 +17,9 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
-const db = getFirestore();
+const db = getFirestore().settings({
+  experimentalForceLongPolling: true
+});
 
 
 export const getPets = async () => {
