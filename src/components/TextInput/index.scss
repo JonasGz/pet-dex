@@ -37,6 +37,16 @@
     border-bottom-color: colors.$error100;
   }
 
+  &__input[type="date"]::before {
+    color: lightgrey;
+    content: attr(placeholder) !important;
+    margin-right: 0.5em;
+  }
+
+  &__input[type="date"]:focus::before {
+      content: "" !important;
+  }
+
   &__input {
     width: 100%;
     height: 100%;

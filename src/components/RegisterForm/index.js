@@ -49,7 +49,7 @@ export default function RegisterForm() {
     error: 'Informe seu nome',
     content: new TextInput({
       id: 'name',
-      placeholder: 'Devhat',
+      placeholder: 'Jonas',
     }),
   });
 

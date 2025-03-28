@@ -37,9 +37,10 @@ export default function Vaccine({ vaccines = [] } = {}) {
   const $addVaccineContainer = this.selected.get('add-vaccine');
 
   const vaccnineDate = new TextInput({
-    placeholder: '20/03/2025',
+    placeholder: 'Data',
     type: 'date',
   })
+
 
   const vaccnineName = new TextInput({
     placeholder: 'Nome da vacina',
