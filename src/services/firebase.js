@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore, setDoc, doc, getDoc, updateDoc, arrayUnion, initializeFirestore } from "firebase/firestore";
+import { setDoc, doc, getDoc, updateDoc, arrayUnion, initializeFirestore } from "firebase/firestore";
 import { Router } from "vanilla-routing";
 
 const firebaseConfig = {
@@ -18,7 +18,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
 const db = initializeFirestore(app, {
-  experimentalForceLongPolling: true
+  experimentalForceLongPolling: true,
+  useFetchStrams: false,
 })
 
 
