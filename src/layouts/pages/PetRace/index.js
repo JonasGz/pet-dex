@@ -11,14 +11,14 @@ const events = ['submit'];
 
 const html = `
   <div class='pet-race'>
-    <div data-select="pet-progress"></div>
-    <div class='pet-name__container'>
-      <div class='pet-name__image' data-select='upload-image-container'></div>
-      <h1 class='pet-name__title'>O que é o seu bichinho?</h1>
-      <div class='pet-name__input' data-select='input-container'></div>
+    <div class="pet-race__pet-progress" data-select="pet-progress"></div>
+    <div class='pet-race__container'>
+      <div class='pet-race__image' data-select='upload-image-container'></div>
+      <h1 class='pet-race__title'>O que é o seu bichinho?</h1>
+      <div class='pet-race__input' data-select='input-container'></div>
     </div>
-    <div class="pet-name__footer">
-      <div class='pet-name__button' data-select='button-container'></div>
+    <div class="pet-race__footer">
+      <div class='pet-race__button' data-select='button-container'></div>
     </div>
   </div>
 `;

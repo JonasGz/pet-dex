@@ -12,7 +12,7 @@ const events = ['submit'];
 
 const html = `
   <div class='pet-birthday'>
-    <div data-select="pet-progress"></div>
+    <div class="pet-birthday__pet-progress" data-select="pet-progress"></div>
 
     <div class='pet-birthday__container'>
       <div class='pet-birthday__image' data-select='upload-image-container'></div>

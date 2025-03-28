@@ -22,7 +22,8 @@ export default function Login() {
   this.loginForm.listen('login', async (email, password) => {
      try {
          await login(email, password)
-         Router.go('/')
+         Router.go('/pets')
+        //  window.location.reload()
        } catch(error) {
          throw new Error(error)
        }

@@ -6,6 +6,10 @@ import jsconfigPaths from 'vite-jsconfig-paths';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
+  },
   root: resolve(__dirname, 'src/layouts/'),
   define: {
     __isBrowser__: true,

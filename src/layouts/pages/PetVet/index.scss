@@ -11,18 +11,18 @@
   justify-content: space-between;
 
   &__progress {
-    padding: 4rem 0 0 0;
+    padding: 3rem 0 0 0;
     width: 100%;
   }
 
   &__content {
   max-width: 60rem;
-  padding: 2rem 0;
+  padding: 2rem 2rem;
   }
 
   &__header {
     text-align: center;
-
+    padding: 0 0 2rem 0;
 
     &--text {
       font-family: fonts.$primaryFont;
@@ -131,7 +131,7 @@
   }
 
   &__button {
-    width: min(100%, 42rem);
+    width: min(100%, 32rem);
   }
 }
 
@@ -178,19 +178,15 @@
 
     &__card-group {
       gap: 2.4rem;
+      overflow: auto;
+
     }
 
     &__button {
       margin-bottom: 0;
+      width: min(100%, 42rem);
+
     }
   }
 }
 
-
-  @include breakpoints.from667 {
-    .petvet-page {
-      &__card-group {
-        overflow: auto;
-      }
-    }
-  }
