@@ -180,8 +180,6 @@ export default function PetVetPage({ vaccines = [] } = {}) {
     await addPet();
     await getPets();
     Router.go('/pets');
-
-    window.location.reload();
   };
 
   this.button.listen('click', emitForm);

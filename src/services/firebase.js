@@ -16,7 +16,7 @@ import {
   getDoc,
   updateDoc,
   arrayUnion,
-  getFirestore,
+  initializeFirestore,
 } from 'firebase/firestore';
 import { Router } from 'vanilla-routing';
 
@@ -33,7 +33,9 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
-const db = getFirestore(app, 'pet-dex-35d7a');
+const db = initializeFirestore(app, {
+  experimentalAutoDetectLongPolling: true,
+});
 
 export const getPets = async () => {
   const user = auth.currentUser;
@@ -171,7 +173,7 @@ export const uploadFileToStorage = async (file) => {
 
 export const addPet = async () => {
   if (!auth.currentUser) return;
-
+  console.log('entrou no addPet');
   const userId = auth.currentUser.uid;
   const userRef = doc(db, 'users', userId);
   const newPet = JSON.parse(localStorage.getItem('pet'));
@@ -198,6 +200,7 @@ export const addPet = async () => {
         ...newPetData,
       }),
     });
+    console.log('executou addPet');
     localStorage.removeItem('pet');
   } catch (error) {
     console.error('Erro ao adicionar pet:', error);
