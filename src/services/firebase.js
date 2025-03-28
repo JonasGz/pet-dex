@@ -34,7 +34,6 @@ export const getPets = async () => {
         localStorage.setItem("pets", JSON.stringify(pets))
         return pets;
       } 
-        console.log("Usuário não encontrado");
         return [];
       
     } catch (error) {
@@ -42,7 +41,6 @@ export const getPets = async () => {
       throw error;
     }
   } else {
-    console.log("Nenhum usuário autenticado");
     return [];
   }
 };
@@ -56,7 +54,6 @@ onAuthStateChanged(auth, (user) => {
   } else {
       const event = new CustomEvent("auth", {detail: { hasUser: false}})
       window.dispatchEvent(event)
-      console.log("Nenhum usuário autenticado");
   }
 });
 
@@ -115,10 +112,10 @@ export const login = async (email, password) => {
 export const loginWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
+
     const {user} = result;
 
     await createUserDocument(user);
-    console.log('Login google feito')
     Router.go('/pets');
     window.location.reload();
 

@@ -7,7 +7,7 @@ const events = ['click']
 
 const html = `
 <div data-select="avatar-button" class="avatar-button">
-  <a class="avatar-button__container" data-select="avatar-button" title="Adicionar amigo">
+  <a class="avatar-button__container" title="Adicionar amigo">
     <div class="avatar-button__bg">
       <img class="avatar-button__cross" src="${cross}" alt="cross"/>
     </div>

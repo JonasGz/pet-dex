@@ -66,8 +66,9 @@ export default function LoginForm() {
 
 
 
-  const emailInput = new TextInput({ placeholder: 'E-mail' });
+  const emailInput = new TextInput({ id: 'emailInputLogin', placeholder: 'E-mail' });
   const passwordInput = new TextInput({
+    id: 'passwordInputLogin',
     placeholder: 'Senha',
     assetPosition: 'suffix',
     type: 'password',
