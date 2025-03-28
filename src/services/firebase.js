@@ -16,7 +16,7 @@ import {
   getDoc,
   updateDoc,
   arrayUnion,
-  initializeFirestore,
+  getFirestore,
 } from 'firebase/firestore';
 import { Router } from 'vanilla-routing';
 
@@ -29,13 +29,11 @@ const firebaseConfig = {
   appId: '1:927889182739:web:dc8491ed88b4622ad72fe6',
 };
 
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
-const db = initializeFirestore(app, {
-  experimentalForceLongPolling: true,
-});
+const db = getFirestore();
 
 export const getPets = async () => {
   const user = auth.currentUser;
