@@ -29,11 +29,11 @@ const firebaseConfig = {
   appId: '1:927889182739:web:dc8491ed88b4622ad72fe6',
 };
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
-const db = getFirestore();
+const db = getFirestore(app, 'pet-dex-35d7a');
 
 export const getPets = async () => {
   const user = auth.currentUser;
