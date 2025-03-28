@@ -85,15 +85,15 @@ function createAndMount({ name, text, mountTo, value, borderless }) {
 
 export default function PetVetPage({ vaccines = [] } = {}) {
   Component.call(this, { html, events });
-  const $petProgress = this.selected.get('pet-progress')
+  const $petProgress = this.selected.get('pet-progress');
   const $footer = this.selected.get('footer');
   const $specialCareRadio = this.selected.get('special-care-radio');
   const $specialCareText = this.selected.get('special-care-text');
   const $neuteredRadio = this.selected.get('neutered-radio');
   const $cardGroup = this.selected.get('card-group');
 
-  this.progress = new PetProgress("Veterinário", "5");
-  this.progress.mount($petProgress)
+  this.progress = new PetProgress('Veterinário', '5');
+  this.progress.mount($petProgress);
 
   this.vaccine = new Vaccine({ vaccines });
 
@@ -176,12 +176,12 @@ export default function PetVetPage({ vaccines = [] } = {}) {
     form.vaccines = this.vaccine.listVaccines();
 
     this.emit('submit', form);
-    addData(form)
-    await addPet()
+    addData(form);
+    await addPet();
     await getPets();
-    Router.go('/pets')
+    Router.go('/pets');
 
-    window.location.reload()
+    window.location.reload();
   };
 
   this.button.listen('click', emitForm);
