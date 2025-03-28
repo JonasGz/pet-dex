@@ -85,6 +85,7 @@ export default function PetName() {
       });
 
       Router.go('/pet-race');
+      window.location.reload();
     } catch (error) {
       this.button.setIsDisabled(false);
       this.button.setText('Continuar');
