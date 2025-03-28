@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from "firebase/auth";
-import { getFirestore, setDoc, doc, getDoc, updateDoc, arrayUnion, getDocs } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getFirestore, setDoc, doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { Router } from "vanilla-routing";
 
 const firebaseConfig = {
@@ -16,6 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth();
+const googleProvider = new GoogleAuthProvider();
 const db = getFirestore();
 
 
@@ -87,6 +88,8 @@ export const register = async (name, email, password) => {
     await updateProfile(user, {
       displayName: name,
     });
+    Router.go('/pets')
+    window.location.reload();
 
     await createUserDocument(user)
   } catch (error) {
@@ -100,7 +103,7 @@ export const login = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const {user} = userCredential;
     Router.go('/pets')
-    location.reload();
+    window.location.reload();
 
     return user
   } catch (error) {
@@ -109,10 +112,27 @@ export const login = async (email, password) => {
   }
 };
 
+export const loginWithGoogle = async () => {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    const {user} = result;
+
+    await createUserDocument(user);
+    console.log('Login google feito')
+    Router.go('/pets');
+    window.location.reload();
+
+    return user;
+  } catch (error) {
+    console.error("Erro ao fazer login com Google:", error.message);
+    throw error;
+  }
+};
+
 export const logout = async () => {
   signOut(auth).then(() => {
-    location.reload();
     Router.go('/')
+    window.location.reload();
   })
 }
 

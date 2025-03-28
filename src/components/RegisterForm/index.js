@@ -8,22 +8,17 @@ import {
   isPasswordValid,
 } from '../../utils/validations';
 import googleIcon from './images/google-icon.svg';
-import facebookIcon from './images/facebook-icon.svg';
 import './index.scss';
 
-const events = ['register'];
+const events = ['register', 'login-google'];
 
 const html = `
     <div class="register-form">
       <h1 class="register-form__title">Crie sua petconta</h1>
       <div class="register-form__socials">
-        <button class="register-form__social">
+        <button data-select="login-google" class="register-form__social">
           <img class="register-form__social-img" src=${googleIcon} />
           Google
-        </button>
-        <button class="register-form__social">
-          <img class="register-form__social-img" src=${facebookIcon} />
-          Facebook
         </button>
       </div>
       <div class="register-form__divisor">
@@ -43,6 +38,11 @@ export default function RegisterForm() {
 
   const $formButton = this.selected.get('form-button');
   const $fields = this.selected.get('fields');
+  const $loginGoogle = this.selected.get('login-google');
+
+  $loginGoogle.addEventListener('click', () => {
+    this.loginGoogle()
+  })
 
   const name = new Field({
     label: 'Nome',
@@ -198,5 +198,8 @@ RegisterForm.prototype = Object.assign(
     register(nameValue, emailValue, passwordValue) {
       this.emit('register', nameValue, emailValue, passwordValue);
     },
+    loginGoogle() {
+      this.emit('login-google')
+    }
   },
 );

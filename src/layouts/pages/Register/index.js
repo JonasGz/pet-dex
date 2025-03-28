@@ -2,7 +2,7 @@ import { Component } from 'pet-dex-utilities';
 import { Router } from 'vanilla-routing';
 import './index.scss';
 import RegisterForm from '~src/components/RegisterForm';
-import { register } from '~src/services/firebase';
+import { loginWithGoogle, register } from '~src/services/firebase';
 
 const html = `
   <div data-select="container" class="register-page">
@@ -28,6 +28,15 @@ export default function Register() {
     }
     
   })
+
+    this.registerForm.listen('login-google', async () => {
+      try {
+        await loginWithGoogle();
+        Router.go('/pets');
+      } catch(error) {
+        throw new Error(error);
+      }
+    })
 }
 
 Register.prototype = Object.assign(

@@ -33,7 +33,7 @@ export default function NoPetRegirested() {
   this.button.mount($container);
 
   this.button.listen('click', () => {
-    Router.go('/add/addpets');
+    Router.go('/pet-name');
   });
 }
 

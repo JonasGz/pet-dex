@@ -29,18 +29,17 @@
 
   &__socials {
     width: 100%;
-
+    justify-content: center;
     display: flex;
     flex-direction: row;
     gap: 2rem;
   }
 
   &__social {
-    max-width: 21.7rem;
-
+    max-width: 30rem;
+    width: 100%;
     display: flex;
     flex-direction: row;
-
     flex-grow: 1;
 
     gap: 1rem;

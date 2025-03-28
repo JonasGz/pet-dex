@@ -9,7 +9,7 @@ import pawIcon from './images/paw-form-icon.svg';
 import googleIcon from './images/google-icon.svg';
 import facebookIcon from './images/facebook-icon.svg';
 
-const events = ['login'];
+const events = ['login', 'login-google', 'login-facebook'];
 
 const html = `
   <div>
@@ -44,8 +44,7 @@ const html = `
       </div>
 
       <div data-select="provider-container" class="login-form-container__provider-container">
-        <button class="provider-button"><img src="${googleIcon}" class="icon"/ >Google</button>
-        <button class="provider-button"><img src="${facebookIcon}" class="icon"/ >Facebook</button>
+        <button data-select="google-login" class="provider-button"><img src="${googleIcon}" class="icon"/ >Google</button>
       </div>
     </div>
   </div>
@@ -59,6 +58,13 @@ export default function LoginForm() {
   const $rememberOption = this.selected.get('remember-option');
   const $emailErrorMessage = this.selected.get('email-error-message');
   const $passwordErrorMessage = this.selected.get('password-error-message');
+  const $googleLogin = this.selected.get('google-login');
+
+  $googleLogin.addEventListener('click', () => {
+    this.loginGoogle()
+  })
+
+
 
   const emailInput = new TextInput({ placeholder: 'E-mail' });
   const passwordInput = new TextInput({
@@ -133,6 +139,9 @@ export default function LoginForm() {
 LoginForm.prototype = Object.assign(LoginForm.prototype, Component.prototype, {
   login(email, password) {
     this.emit('login', email, password);
+  },
+  loginGoogle() {
+    this.emit('login-google')
   },
   validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
