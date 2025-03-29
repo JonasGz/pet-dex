@@ -25,7 +25,7 @@ const html = `
         <div class="pet-profile-page__message">
           <strong class="pet-profile-page__message-title">Mensagem do seu bichinho</strong>
           <div class="pet-profile-page__message-desc">
-          Mistura marrom-escura-branca, com sobrancelhas claras e uma mancha em forma de coração na pata esquerda.
+          Meu doce bichinho que parece um anjo caído do céu e alegra todos os meus dias com sua fofura.
           </div>
         </div>
         <div class="pet-profile-page__options">
