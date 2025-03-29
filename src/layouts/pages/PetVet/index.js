@@ -20,7 +20,7 @@ const html = `
     <div class="petvet-page__content">
       <div class="petvet-page__header">
         <p class="petvet-page__header--text">Conte-nos um pouco mais do seu animal</p>
-        <p class="petvet-page__header--subtext">Seu pet já foi vacinado? Conta pra gente que mês ou ano que você costuma comemorar o aniversário dele!</p>
+        <p class="petvet-page__header--subtext">Seu pet já foi vacinado? Conta pra gente a data das últimas vacinas!</p>
       </div>
       <div class="petvet-page__card-group" data-select="card-group">
         <div class="petvet-page__card">

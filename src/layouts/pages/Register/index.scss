@@ -2,7 +2,7 @@
 @use '~styles/breakpoints.scss' as breakpoints;
 
 .register-page {
-  min-height: 100%;
+  height: 100%;
 
   display: grid;
   padding: 6rem 0 2rem 0;
@@ -49,6 +49,8 @@
 
 @include breakpoints.from1024 {
   .register-page {
+      padding: 0 0 0 0;
+    
     &__description {
       max-width: 46rem;
     }

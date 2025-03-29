@@ -91,7 +91,7 @@
   }
 
   &__button {
-    width: min(100%, 42rem);
+    width: min(100%, 32rem);
   }
 }
 
@@ -102,6 +102,10 @@
     &__title {
       font-size: fonts.$sm;
       font-weight: fonts.$medium;
+    }
+
+    &__button {
+      width: min(100%, 42rem);
     }
 
     &__hint {

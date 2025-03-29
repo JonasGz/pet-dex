@@ -6,7 +6,7 @@
 .home {
   width: 200vw;
   height: 100dvh;
-  overflow-x: hidden;
+  overflow: hidden;
 
   display: grid;
   grid-template-areas:
@@ -31,7 +31,6 @@
 
     transform: translateX(-100vw);
 
-    transition: transform 0.3s;
   }
 
   &__navigation {
@@ -67,7 +66,7 @@
 @include breakpoints.from1024 {
   .home {
     width: 100vw;
-
+    height: 100dvh;
     grid-template-areas:
       'sidemenu nav'
       'sidemenu content';
