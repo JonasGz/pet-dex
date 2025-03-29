@@ -3,6 +3,7 @@ export default function initializeScrollable(
   exitmenu,
   itemsMenu,
   home,
+  petsMenu
 ) {
   const breakpointDesktop = 1024;
 
@@ -30,6 +31,14 @@ export default function initializeScrollable(
 
     if (window.innerWidth < breakpointDesktop) closeMenu();
   }
+
+  petsMenu.addEventListener('click', (event) => {
+    const target = event.target.closest('.avatar-button, a');
+  
+    if (!target) return;
+    
+    closeMenu();
+  });
 
   itemsMenu.forEach((li) => {
     li.addEventListener('click', activeClassMenu.bind(null, li));

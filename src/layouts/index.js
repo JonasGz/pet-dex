@@ -22,8 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const $hamburgerMenu = navigation.selected.get('hamburger-menu');
   const $exitMenu = sideMenu.selected.get('exitMenu');
   const $itemsMenu = sideMenu.selected.get('menuitens').querySelectorAll('li');
+  const $petsMenu = sideMenu.selected.get('avatar-container')
 
-  initializeScrollable($hamburgerMenu, $exitMenu, $itemsMenu, $home);
+  initializeScrollable($hamburgerMenu, $exitMenu, $itemsMenu, $home, $petsMenu);
   initializeSwiper();
   mainRouter();
 });
