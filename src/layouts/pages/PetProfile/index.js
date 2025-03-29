@@ -2,6 +2,7 @@ import { Component } from 'pet-dex-utilities';
 import './index.scss';
 import Vaccine from '~src/components/Vaccine';
 import { findPetById } from '~src/services/localStorage';
+import { addVaccine } from '~src/services/firebase';
 import birthday from './images/birthday';
 
 const events = ['submit'];
@@ -44,15 +45,14 @@ const html = `
             ${birthday}
             <div class="pet-profile-page__birthday-info">
               <strong class="pet-profile-page__birthday-info-title">Aniversário</strong>
-              <strong class="pet-profile-page__birthday-info-desc">3 Novembro 2019</strong>
+              <strong data-select="pet-birthday" class="pet-profile-page__birthday-info-desc">3 Novembro 2019</strong>
             </div>
           </div>
-          <strong data-select="pet-birthday" class="pet-profile-page__birthday-value">3 anos</strong>
+          <strong data-select="pet-age" class="pet-profile-page__birthday-value">3 anos</strong>
         </div>
         <div data-select="container-vaccines" class="pet-profile-page__vaccines">
         </div>
       </div>
-      <div class="pet-profile-page__footer"></div>
       </div>
     </div>
   </div>
@@ -65,23 +65,35 @@ export default function PetProfile() {
   const $petType = this.selected.get('pet-type');
   const $petWeight = this.selected.get('pet-weight');
   const $petNeutered = this.selected.get('pet-neutered');
-  const $petBirthday = this.selected.get('pet-birthday');
+  const $petBirthday = this.selected.get('pet-birthday')
+  const $petAge = this.selected.get('pet-age');
   const $vaccinesContainer = this.selected.get("container-vaccines");
   const {pathname} = window.location;
   const idUrl = pathname.split("/pet-profile/")[1];
   const petSelect = findPetById(idUrl);
+  const formattedBirthday = petSelect.petBirthday.birthday.split("-").reverse().join("/");
 
   $avatarImg.src = petSelect.name.image.imageStorage;
   $petName.textContent = petSelect.name.name;
   $petType.textContent = petSelect.petRace;
   $petWeight.textContent = `${petSelect.petWeight} kg`
   $petNeutered.textContent = petSelect.petVet.isNeutered ? 'Sim' : 'Não';
-  $petBirthday.textContent = `${petSelect.petBirthday} anos`;
+  $petBirthday.textContent = formattedBirthday;
+  $petAge.textContent = `${petSelect.petBirthday.age} anos`;
   const vaccinesPet = petSelect.petVet.vaccines;
 
-  const $listVaccines = new Vaccine({ vaccines: vaccinesPet });
-  
-  $listVaccines.mount($vaccinesContainer);
+  const vaccines = new Vaccine({ vaccines: vaccinesPet });
+  vaccines.mount($vaccinesContainer);
+
+  vaccines.listen('group:change', async (vaccine) => {
+    await addVaccine(petSelect.id, vaccine)
+    window.location.reload()
+  });
+
+  vaccines.listen('group:add', async (vaccine) => {
+    await addVaccine(petSelect.id, vaccine);
+    window.location.reload()
+  });
 
 }
 

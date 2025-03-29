@@ -14,7 +14,6 @@
     display: flex;
     flex-direction: column;
     gap: 3rem;
-    // justify-content: space-around;
     width: 100%;
   }
 
@@ -22,6 +21,7 @@
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    padding: 0 0 2rem 0;
   }
 
   &__header-page {

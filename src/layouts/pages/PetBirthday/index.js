@@ -18,6 +18,8 @@ const html = `
       <div class='pet-birthday__image' data-select='upload-image-container'></div>
       <h1 class='pet-birthday__title'>Quantos anos tem o seu bichinho?</h1>
       <div class='pet-birthday__input' data-select='input-container'></div>
+      <h1 class='pet-birthday__title'>Quando seu bichinho faz aniversário?</h1>
+      <div class='pet-birthday__input' data-select='input-container-birthday'></div>
     </div>
     <div class="pet-birthday__footer">
       <div class='pet-birthday__button' data-select='button-container'></div>
@@ -30,6 +32,8 @@ export default function PetBirthday() {
 
   const $petProgress = this.selected.get('pet-progress')
   const $inputContainer = this.selected.get('input-container');
+  const $inputContainerBirthday = this.selected.get('input-container-birthday');
+
   const $uploadImage = this.selected.get('upload-image-container');
   const $buttonContainer = this.selected.get('button-container');
   const petImage = JSON.parse(localStorage.getItem('pet'));
@@ -42,6 +46,11 @@ export default function PetBirthday() {
     type: 'number',
   });
 
+  this.inputBirthday = new TextInput({
+    placeholder: 'Data',
+    type: 'date',
+  });
+
   this.petImage = new PetImage(petImage.name.image.imageLocal);
   this.button = new Button({
     text: 'Continuar',
@@ -51,21 +60,28 @@ export default function PetBirthday() {
 
   const buttonEnabled = () => {
     const input = this.input.getValue();
+    const inputBirthday = this.inputBirthday.getValue()
 
-    this.button.setIsDisabled(!(input));
+    this.button.setIsDisabled(!input && !inputBirthday);
   };
   buttonEnabled();
-  this.input.listen('value:change', buttonEnabled);
+  this.inputBirthday.listen('value:change', buttonEnabled)
 
   this.button.listen('click', () => {
     const age = this.input.getValue();
-    this.emit('submit', { age });
-    addData(age)
+    const birthday = this.inputBirthday.getValue();
+    const petBirthday = 
+    { age,
+      birthday
+    }
+    this.emit('submit', { petBirthday });
+    addData(petBirthday)
     Router.go('/pet-weight')
   });
 
   this.petImage.mount($uploadImage);
   this.input.mount($inputContainer);
+  this.inputBirthday.mount($inputContainerBirthday);
   this.button.mount($buttonContainer);
 }
 

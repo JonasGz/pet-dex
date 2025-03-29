@@ -204,3 +204,31 @@ export const addPet = async () => {
     console.error('Erro ao adicionar pet:', error);
   }
 };
+
+export const addVaccine = async (petId, vaccine) => {
+  try {
+    const userId = auth.currentUser.uid;
+    const userRef = doc(db, "users", userId);
+    const userDoc = await getDoc(userRef);
+    const userData = userDoc.data();
+    
+    const updatedPets = userData.pets.map(pet => {
+        if (pet.id === petId) {
+            return {
+                ...pet,
+                petVet: {
+                    ...pet.petVet,
+                    vaccines: [...pet.petVet.vaccines, vaccine]
+                }
+            };
+        }
+        return pet;
+    });
+
+    await updateDoc(userRef, { pets: updatedPets });
+    console.log("Vacina adicionada com sucesso!");
+
+  } catch(error) {
+    throw new Error (error);
+  }
+}

@@ -41,7 +41,6 @@ export default function Vaccine({ vaccines = [] } = {}) {
     type: 'date',
   })
 
-
   const vaccnineName = new TextInput({
     placeholder: 'Nome da vacina',
     type: 'text'
@@ -73,6 +72,7 @@ export default function Vaccine({ vaccines = [] } = {}) {
   });
 
   buttonAddVaccine.listen('click', () => {
+    
     const date = vaccnineDate.getValue();
     const nameVaccine = vaccnineName.getValue();
     const veterinary = vaccineVeterinarian.getValue();
