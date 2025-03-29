@@ -46,8 +46,8 @@ const html = `
               <img src="${meusPets}">Meus Pets
             </a>
           </li>
-          <hr class="side-menu-content__lineinside"/>
-          <li data-select="register">
+          <div class="side-menu-content__lineinside"> <div/>
+          <li class="side-menu-content__register-li" data-select="register">
             <a data-vanilla-route-link="spa" class="side-menu-content__menuitens" href="/account/create-account">
               <img src="${register}" alt="registro">Registro
             </a>
