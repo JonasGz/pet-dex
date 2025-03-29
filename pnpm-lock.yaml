@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@lottiefiles/dotlottie-web':
+    specifier: 0.41.0
+    version: 0.41.0
   concurrently:
     specifier: 8.2.2
     version: 8.2.2
@@ -2660,6 +2663,10 @@ packages:
     dependencies:
       call-bind: 1.0.7
     dev: true
+
+  /@lottiefiles/dotlottie-web@0.41.0:
+    resolution: {integrity: sha512-hJR3zN9DiQkNjEA0+OJbuPJPXZtbySrfYa61WD5qFc7dBPHGDUaSC6APvwM2FSrzPy0AU4nrOPfExEe6VNznkg==}
+    dev: false
 
   /@mdx-js/react@3.0.1(@types/react@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-9ZrPIU4MGf6et1m1ov3zKf+q9+deetI51zprKB1D/z3NOb+rUxxtEl3mCjW5wTGh6VhRdwPueh1oRzi6ezkA8A==}

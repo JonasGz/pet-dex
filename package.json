@@ -26,6 +26,7 @@
     "mock-api": "json-server db.json --routes routes.json"
   },
   "dependencies": {
+    "@lottiefiles/dotlottie-web": "0.41.0",
     "concurrently": "8.2.2",
     "dayjs": "^1.11.10",
     "firebase": "11.5.0",

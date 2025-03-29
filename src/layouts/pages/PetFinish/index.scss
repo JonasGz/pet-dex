@@ -1,0 +1,93 @@
+@use '~styles/breakpoints.scss' as breakpoints;
+@use '~styles/colors.scss' as colors;
+@use '~styles/fonts.scss' as fonts;
+
+.pet-finish {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+
+  &__progress {
+    padding: 3rem 0 0 0;
+
+    width: 100%;
+  }
+
+  &__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2.4rem;
+  }
+
+  &__image {
+    max-width: 18.6rem;
+
+    margin: 5rem auto;
+  }
+
+  &__title {
+    font-family: fonts.$primaryFont;
+    color: #39434F;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: fonts.$medium;
+
+    margin: 0 auto 2rem;
+    padding: 0 2rem 0 2rem;
+  }
+
+  &__subtitle {
+    font-family: fonts.$fourthFont;
+    font-size: 1.4rem;
+    color:#606873;
+    margin: 0 auto;
+    padding: 0 2rem 0 2rem;
+    text-align: center;
+  }
+
+  &__footer {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    padding: 0 0 2rem 0;
+
+  }
+
+  &__button {
+    width: min(100%, 32rem);
+  }
+}
+
+@include breakpoints.from1024 {
+  .pet-name {
+    align-items: center;
+
+    &__container {
+      margin-bottom: 0;
+    }
+
+    &__title {
+      font-size: fonts.$sm;
+
+      margin-top: 15rem;
+    }
+    
+    &__input {
+      width: min(100%, 42rem);
+
+    }
+
+    &__button {
+      width: min(100%, 42rem);
+      margin-top: 4rem;
+    }
+  }
+}

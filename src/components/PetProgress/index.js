@@ -15,7 +15,7 @@ const html = `
       </div>
       <div class="pet-progress__container-steps">
         <div class="pet-progress__title-step">Pata</div>
-        <div class="pet-progress__step"><b class="pet-progress__step-current" data-select="step-number">1</b>/5</div>
+        <div class="pet-progress__step"><b class="pet-progress__step-current" data-select="step-number">1</b>/6</div>
       </div>
     </div>
 
@@ -39,7 +39,7 @@ PetProgress.prototype = Object.assign(PetProgress.prototype, Component.prototype
   },
   setStepNumber(type) {
     this.selected.get('step-number').textContent = type;
-    const progressPercentage = (type / 5) * 100;
+    const progressPercentage = (type / 6) * 100;
 
     this.selected.get('bar1').style.width = `${progressPercentage}%`;
     this.selected.get('bar2').style.width = `${100 - progressPercentage}%`;
