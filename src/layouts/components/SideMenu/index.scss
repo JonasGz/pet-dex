@@ -12,8 +12,14 @@
   &__logo-container {
     display: none;
     padding-block: 4rem 2rem;
-
     text-align: center;
+
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
   &__logo {

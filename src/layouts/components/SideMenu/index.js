@@ -17,7 +17,7 @@ import './index.scss';
 
 const html = `
   <nav class="side-menu-nav">
-      <figure class="side-menu-nav__logo-container">
+      <figure data-select="logo" class="side-menu-nav__logo-container">
         <img class="side-menu-nav__logo" src="${petUrl}" alt="pet-dex logo" />
       </figure>
       <div class="side-menu-nav__icons">
@@ -70,6 +70,7 @@ export default function SideMenu() {
   const $login = this.selected.get("login");
   const $addPet = this.selected.get('add-pet');
   const $myPets = this.selected.get('my-pets')
+  const $logo = this.selected.get('logo');
   const hasUser = localStorage.getItem("hasUser");
   const petsDb = JSON.parse(localStorage.getItem('pets'));
   
@@ -79,6 +80,8 @@ export default function SideMenu() {
   addPet.listen('click', () => {
     Router.go('/pet-name')
   })
+
+  $logo.addEventListener('click', () => this.goRoute())
 
   if(hasUser === "true") {
     $register.style.pointerEvents = "none"
@@ -107,12 +110,14 @@ export default function SideMenu() {
 
     addPet.selected.get('avatar-button').style.pointerEvents = 'none';
     addPet.selected.get('avatar-button').style.opacity = '0.6';
-
-
   }
 
 
 
 }
 
-SideMenu.prototype = Object.assign(SideMenu.prototype, Component.prototype);
+SideMenu.prototype = Object.assign(SideMenu.prototype, Component.prototype, {
+  goRoute() {
+    Router.go('/')
+  }
+});

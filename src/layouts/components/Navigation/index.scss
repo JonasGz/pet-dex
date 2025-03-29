@@ -10,6 +10,15 @@
 
   padding-inline: 2rem;
 
+  &__logo-container {
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
   &__icons {
     display: flex;
 
