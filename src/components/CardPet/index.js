@@ -1,10 +1,11 @@
 import { Component } from 'pet-dex-utilities';
 import './index.scss';
+import { Router } from 'vanilla-routing';
 
-const events = ['purchase'];
+const events = ['click'];
 
 const html = `
-  <div class="card-pet-container">
+  <div data-select='card-pet' class="card-pet-container">
     <div class="card-pet-container__infos">
       <div class="card-pet-container__name-type">
         <strong class="card-pet-container__name" data-select="card-pet-name">Snow</strong>
@@ -25,12 +26,18 @@ const html = `
   </div>
 `;
 
-export default function CardPet(name, type, url) {
+export default function CardPet(id, name, type, url) {
   Component.call(this, { html, events });
+  const $cardPet = this.selected.get('card-pet')
   this.enable = true;
   this.setTitle(name)
   this.setType(type)
   this.setSrc(url)
+
+  $cardPet.addEventListener('click', () => {
+    this.goRoute(id);
+  })
+
 }
 
 CardPet.prototype = Object.assign(CardPet.prototype, Component.prototype, {
@@ -42,6 +49,9 @@ CardPet.prototype = Object.assign(CardPet.prototype, Component.prototype, {
   },
   setSrc(url) {
     this.selected.get('card-pet-img').src = url;
+  },
+  goRoute(id) {
+    Router.go(`/pet-profile/${id}`)
   }
   
 });
