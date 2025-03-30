@@ -4,7 +4,7 @@ Bem-vindo ao PetDex, este documento README irá guiá-lo através das informaç�
 
 ## **Introdução**
 
-O PetDex é um projeto mobile/desktop com o objetivo de cadastrar seus pets e suas informações para ter uma forma de visualizar sempre que precisar acessar ou salvar alguma informação.
+O PetDex é um projeto mobile/desktop com o objetivo de cadastrar seus pets e suas informações para ter uma forma de visualizar sempre que precisar.
 
 ## **Contato**
 
