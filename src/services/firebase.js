@@ -108,9 +108,6 @@ export const register = async (name, email, password) => {
     await updateProfile(user, {
       displayName: name,
     });
-    Router.go('/pets');
-    window.location.reload();
-
     await createUserDocument(user);
   } catch (error) {
     console.error('Erro ao registrar usuário:', error.message);
