@@ -90,7 +90,7 @@ export default function SideMenu() {
     $login.style.pointerEvents = "none"
     $login.style.opacity = "0.6"
     
-    petsDb.forEach((pet) => {
+    petsDb?.forEach((pet) => {
       const avatar = new PetAvatar({id: pet.id, title: pet.name.name, imgSrc: pet.name.image.imageStorage})
      avatar.mount($container)
     });

@@ -39,7 +39,6 @@ const db = initializeFirestore(app, {
 
 export const getPets = async () => {
   const user = auth.currentUser;
-
   if (user) {
     const userRef = doc(db, 'users', user.uid);
     try {
@@ -50,7 +49,11 @@ export const getPets = async () => {
         const pets = userData.pets || [];
         localStorage.setItem('pets', JSON.stringify(pets));
         return pets;
-      }
+      } 
+        localStorage.removeItem('pets')
+
+      
+      
       return [];
     } catch (error) {
       console.error('Erro ao pegar pets:', error);
@@ -62,7 +65,9 @@ export const getPets = async () => {
 };
 
 onAuthStateChanged(auth, (user) => {
+
   if (user) {
+
     const event = new CustomEvent('auth', { detail: { hasUser: true } });
     window.dispatchEvent(event);
     getPets();
