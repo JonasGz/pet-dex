@@ -149,9 +149,9 @@ export const loginWithGoogle = async () => {
 };
 
 export const logout = async () => {
+  removePetsLocal()
   signOut(auth).then(() => {
     Router.go('/');
-    removePetsLocal()
     window.location.reload();
   });
 };
