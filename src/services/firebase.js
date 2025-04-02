@@ -213,6 +213,20 @@ export const addPet = async () => {
   }
 };
 
+export const removePet = async (petId) => {
+  try {
+    console.log(petId)
+    const userId = auth.currentUser.uid;
+    const userRef = doc(db, 'users', userId);
+    const userDoc = await getDoc(userRef);
+    const userData = userDoc.data();
+    const updatedPets = userData.pets.filter(pet => pet.id !== petId);
+    await updateDoc(userRef, { pets: updatedPets });
+  } catch(error) {
+    throw new Error(error);
+  }
+}
+
 export const addVaccine = async (petId, vaccine) => {
   try {
     const userId = auth.currentUser.uid;

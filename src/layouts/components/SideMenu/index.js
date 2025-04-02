@@ -98,7 +98,9 @@ export default function SideMenu() {
     
 
     const $exit = this.selected.get('exit');
-    $exit.addEventListener('click', () => logout())
+    $exit.addEventListener('click', async () => {
+      await logout()
+    })
 
   } else {
     $addPet.style.pointerEvents = "none"

@@ -1,11 +1,14 @@
 import { Component } from 'pet-dex-utilities';
 import './index.scss';
 import Vaccine from '~src/components/Vaccine';
-import { findPetById } from '~src/services/localStorage';
-import { addVaccine } from '~src/services/firebase';
+import { findPetById, removePetsLocal, updatePetsLocal } from '~src/services/localStorage';
+import { addVaccine, removePet } from '~src/services/firebase';
+import { Router } from 'vanilla-routing';
 import birthday from './images/birthday';
+import deleteSvg from './images/delete';
 
-const events = ['submit'];
+
+const events = ['delete'];
 
 const html = `
   <div class='pet-profile-page'>
@@ -15,12 +18,17 @@ const html = `
       </div>
       <div class="pet-profile-page__content">
         <div class="pet-profile-page__content-header">
-          <div class="pet-profile-page__avatar">
-            <img data-select="avatar-img" class="pet-profile-page__img" src="https://firebasestorage.googleapis.com/v0/b/pet-dex-35d7a.firebasestorage.app/o/petImages%2F1743034270172?alt=media&token=6465b77c-af9f-4bbe-94de-962dd6c2b630" alt=""/>
+          <div class="pet-profile-page__content-header-infos">
+            <div class="pet-profile-page__avatar">
+              <img data-select="avatar-img" class="pet-profile-page__img" src="https://firebasestorage.googleapis.com/v0/b/pet-dex-35d7a.firebasestorage.app/o/petImages%2F1743034270172?alt=media&token=6465b77c-af9f-4bbe-94de-962dd6c2b630" alt="Pet"/>
+            </div>
+            <div class="pet-profile-page__infos">
+              <strong data-select="pet-name" class="pet-profile-page__title">Kratos o bom de guerra</strong>
+              <span data-select="pet-type" class="pet-profile-page__subtitle">Dog</span>
+            </div>
           </div>
-          <div class="pet-profile-page__infos">
-            <strong data-select="pet-name" class="pet-profile-page__title">Kratos o bom de guerra</strong>
-            <span data-select="pet-type" class="pet-profile-page__subtitle">Dog</span>
+          <div data-select="button-delete" class="pet-profile-page__content-header-delete">
+            ${deleteSvg}
           </div>
         </div>
         <div class="pet-profile-page__message">
@@ -68,10 +76,27 @@ export default function PetProfile() {
   const $petBirthday = this.selected.get('pet-birthday')
   const $petAge = this.selected.get('pet-age');
   const $vaccinesContainer = this.selected.get("container-vaccines");
+  const $buttonDelete = this.selected.get("button-delete");
   const {pathname} = window.location;
   const idUrl = pathname.split("/pet-profile/")[1];
   const petSelect = findPetById(idUrl);
   const formattedBirthday = petSelect.petBirthday.birthday.split("-").reverse().join("/");
+
+  $buttonDelete.addEventListener('click', async () => {
+    try {
+      // eslint-disable-next-line no-alert
+      const userConfirmed = window.confirm('Tem certeza que deseja remover este pet?');
+
+      if(!userConfirmed) return false;
+
+      await removePet(idUrl);
+      await updatePetsLocal(idUrl);
+      Router.go('/pets')
+      window.location.reload();
+    } catch(error) {
+      throw new Error(error)
+    }
+  })
 
   $avatarImg.src = petSelect.name.image.imageStorage;
   $petName.textContent = petSelect.name.name;

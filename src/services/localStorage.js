@@ -63,3 +63,14 @@ export const removePetsLocal = async () => {
     throw new Error(error)
   }
 }
+
+export const updatePetsLocal = async (petId) => {
+  try {
+    const pets = JSON.parse(localStorage.getItem('pets')) || [];
+    const updatedPets = pets.filter(pet => pet.id !== petId);
+    localStorage.setItem('pets', JSON.stringify(updatedPets));
+    
+  } catch(error) {
+    throw new Error(error)
+  }
+}

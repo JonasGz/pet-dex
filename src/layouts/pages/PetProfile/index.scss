@@ -17,6 +17,8 @@
     width: 100%;
   }
 
+
+
   &__content {
     display: flex;
     flex-direction: column;
@@ -43,12 +45,34 @@
     display: flex;
     align-items: center;
     gap: 2rem;
+    justify-content: space-between;
+  }
+
+  &__content-header-infos {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    width: max-content;
+  }
+
+  &__content-header-delete {
+    font-family: fonts.$sixthFont;
+    color: #39434F;
+    font-weight: fonts.$semiBold;
+    font-size: 2.2rem;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
   &__infos {
     display: flex;
     flex-direction: column;
     gap: 1.4rem;
+    width: max-content;
   }
 
   &__title {
@@ -140,7 +164,7 @@
   }
 
   &__neutered-value {
-    color:#39434F;
+    color:#4f3939;
     font-weight: fonts.$semiBold;
   }
 
