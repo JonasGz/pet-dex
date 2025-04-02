@@ -93,6 +93,7 @@ export default function PetProfile() {
       await updatePetsLocal(idUrl);
       Router.go('/pets')
       window.location.reload();
+      
     } catch(error) {
       throw new Error(error)
     }
