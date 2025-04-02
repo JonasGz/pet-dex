@@ -89,11 +89,13 @@ export default function SideMenu() {
 
     $login.style.pointerEvents = "none"
     $login.style.opacity = "0.6"
+    if(petsDb) {
+      petsDb.forEach((pet) => {
+        const avatar = new PetAvatar({id: pet.id, title: pet.name.name, imgSrc: pet.name.image.imageStorage})
+       avatar.mount($container)
+      });
+    }
     
-    petsDb?.forEach((pet) => {
-      const avatar = new PetAvatar({id: pet.id, title: pet.name.name, imgSrc: pet.name.image.imageStorage})
-     avatar.mount($container)
-    });
 
     const $exit = this.selected.get('exit');
     $exit.addEventListener('click', () => logout())

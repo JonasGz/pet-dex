@@ -51,8 +51,6 @@ export const getPets = async () => {
         return pets;
       } 
         localStorage.removeItem('pets')
-
-      
       
       return [];
     } catch (error) {
@@ -65,9 +63,7 @@ export const getPets = async () => {
 };
 
 onAuthStateChanged(auth, (user) => {
-
   if (user) {
-
     const event = new CustomEvent('auth', { detail: { hasUser: true } });
     window.dispatchEvent(event);
     getPets();

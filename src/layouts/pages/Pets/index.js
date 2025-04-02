@@ -60,11 +60,14 @@ export default function Pets() {
     next.applyCss('button__slider')
 
     const arrayCard = [];
-    petsDb?.forEach((pet) => {
-      $loading.style.display = "none";
-      this.card = new CardPet(pet.id, pet.name.name, pet.petRace, pet.name.image.imageStorage);
-      arrayCard.push(this.card.elements[0]);
-    })
+    if(petsDb) {
+      petsDb.forEach((pet) => {
+        $loading.style.display = "none";
+        this.card = new CardPet(pet.id, pet.name.name, pet.petRace, pet.name.image.imageStorage);
+        arrayCard.push(this.card.elements[0]);
+      })
+    }
+   
 
     const sliding = new Sliding({slides: arrayCard,
       slideSideSpacing: 65,

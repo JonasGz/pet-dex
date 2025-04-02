@@ -8,7 +8,7 @@ export default {
     $content.classList.add('home__content-page');
     const petsDb = JSON.parse(localStorage.getItem('pets'));
     const isNotEmpty = (arr) => arr?.length > 0;
-    if (!isNotEmpty(petsDb)) {
+    if (!petsDb && !isNotEmpty(petsDb)) {
       const noPetRegistered = new NoPetRegirested();
       noPetRegistered.mount($content)
     } else {
