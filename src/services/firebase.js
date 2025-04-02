@@ -150,11 +150,19 @@ export const loginWithGoogle = async () => {
 };
 
 export const logout = async () => {
-  removePetsLocal()
-  signOut(auth).then(() => {
-    Router.go('/');
-    window.location.reload();
-  });
+  try {
+    await new Promise((resolve) => {
+      removePetsLocal()
+      resolve()
+    })
+
+    await signOut(auth);
+    Router.go('/')
+
+    window.location.reload()
+  } catch(error) {
+    throw new Error(error);
+  }
 };
 
 export const uploadFileToStorage = async (file) => {
