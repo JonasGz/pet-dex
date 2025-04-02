@@ -66,6 +66,7 @@ onAuthStateChanged(auth, (user) => {
     window.dispatchEvent(event);
     getPets();
   } else {
+    removePetsLocal();
     const event = new CustomEvent('auth', { detail: { hasUser: false } });
     window.dispatchEvent(event);
   }
