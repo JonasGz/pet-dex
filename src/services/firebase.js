@@ -50,7 +50,7 @@ export const getPets = async () => {
           const pets = userData.pets || [];
           setPetsLocal(pets);
         } else {
-          removePetsLocal();
+          await removePetsLocal();
         }
       }
     } catch (error) {
@@ -60,13 +60,13 @@ export const getPets = async () => {
 
 };
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (user) {
     const event = new CustomEvent('auth', { detail: { hasUser: true } });
     window.dispatchEvent(event);
     getPets();
   } else {
-    removePetsLocal();
+    await removePetsLocal();
     const event = new CustomEvent('auth', { detail: { hasUser: false } });
     window.dispatchEvent(event);
   }
@@ -151,14 +151,13 @@ export const loginWithGoogle = async () => {
 
 export const logout = async () => {
   try {
-    await new Promise((resolve) => {
-      removePetsLocal()
-      resolve()
-    })
-
+    
+    await removePetsLocal()
     await signOut(auth);
-    // Router.go('/')
-
+    await new Promise((resolve) => {
+      Router.go('/');
+      resolve();
+    })
     window.location.reload()
   } catch(error) {
     throw new Error(error);
