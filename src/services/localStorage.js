@@ -46,3 +46,20 @@ export const findPetById = (idUrl) => {
 
   return petSelecionado;
 }
+
+
+export const setPetsLocal = async (petsDb) => {
+    try {
+        localStorage.setItem('pets', JSON.stringify(petsDb));
+    } catch (error) {
+      throw new Error(error);
+    }
+};
+
+export const removePetsLocal = async () => {
+  try {
+    localStorage.removeItem('pets')
+  } catch(error) {
+    throw new Error(error)
+  }
+}

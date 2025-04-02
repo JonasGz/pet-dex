@@ -19,6 +19,7 @@ import {
   initializeFirestore,
 } from 'firebase/firestore';
 import { Router } from 'vanilla-routing';
+import { removePetsLocal, setPetsLocal } from './localStorage';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDJt47vVZ0Yuq4UWXZuPE5VsecjFQKOP2o',
@@ -38,28 +39,25 @@ const db = initializeFirestore(app, {
 });
 
 export const getPets = async () => {
-  const user = auth.currentUser;
-  if (user) {
-    const userRef = doc(db, 'users', user.uid);
     try {
-      const userSnap = await getDoc(userRef);
+      const user = auth.currentUser;
+      const userRef = doc(db, 'users', user.uid);
+      if (user) {
+        const userSnap = await getDoc(userRef);
 
-      if (userSnap.exists()) {
-        const userData = userSnap.data();
-        const pets = userData.pets || [];
-        localStorage.setItem('pets', JSON.stringify(pets));
-        return pets;
-      } 
-        localStorage.removeItem('pets')
-      
-      return [];
+        if (userSnap.exists()) {
+          const userData = userSnap.data();
+          const pets = userData.pets || [];
+          setPetsLocal(pets);
+        } else {
+          removePetsLocal();
+        }
+      }
     } catch (error) {
       console.error('Erro ao pegar pets:', error);
       throw error;
     }
-  } else {
-    return [];
-  }
+
 };
 
 onAuthStateChanged(auth, (user) => {
@@ -153,6 +151,7 @@ export const loginWithGoogle = async () => {
 export const logout = async () => {
   signOut(auth).then(() => {
     Router.go('/');
+    removePetsLocal()
     window.location.reload();
   });
 };
