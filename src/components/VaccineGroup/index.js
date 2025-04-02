@@ -40,6 +40,7 @@ VaccineGroup.prototype = Object.assign(
       this.items.set(item.id, vaccineItem);
       this.emit('item:change', vaccineItem);
     },
+    
     listItems() {
       const items = [];
 

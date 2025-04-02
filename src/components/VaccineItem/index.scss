@@ -35,6 +35,17 @@
   &__vet {
     line-height: 2rem;
   }
+  
+  &__delete {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 
   &__divider {
     width: 1px;

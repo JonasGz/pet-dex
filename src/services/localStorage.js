@@ -78,3 +78,27 @@ export const updatePetsLocal = async (petId) => {
     throw new Error(error)
   }
 }
+
+export const updateVaccineLocal = async (petId, vaccineId) => {
+  try {
+    const pets = JSON.parse(localStorage.getItem('pets')) || []
+    const updatedLocalPets = pets.map(pet => {
+      if (pet.id === petId) {
+        return {
+          ...pet,
+          petVet: {
+            ...pet.petVet,
+            vaccines: pet.petVet.vaccines.filter(v => v.id !== vaccineId)
+          }
+        };
+      }
+      return pet;
+    });
+
+    localStorage.setItem('pets', JSON.stringify(updatedLocalPets))
+
+    return true;
+  } catch(error) {
+    throw new Error(error)
+  }
+}

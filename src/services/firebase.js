@@ -251,7 +251,36 @@ export const addVaccine = async (petId, vaccine) => {
     });
 
     await updateDoc(userRef, { pets: updatedPets });
-    console.log("Vacina adicionada com sucesso!");
+
+  } catch(error) {
+    throw new Error (error);
+  }
+}
+
+export const removeVaccine = async (petId, vaccineId) => {
+  try {
+    const userId = auth.currentUser.uid;
+    const userRef = doc(db, "users", userId);
+    const userDoc = await getDoc(userRef);
+    const userData = userDoc.data();
+    
+    const updatedPets = userData.pets.map(pet => {
+      if (pet.id === petId) {
+        const updatedVaccines = pet.petVet.vaccines.filter(v => v.id !== vaccineId);
+        
+        return {
+          ...pet,
+          petVet: {
+            ...pet.petVet,
+            vaccines: updatedVaccines
+          }
+        };
+      }
+      return pet;
+    });
+
+    await updateDoc(userRef, { pets: updatedPets });
+    return true; 
 
   } catch(error) {
     throw new Error (error);

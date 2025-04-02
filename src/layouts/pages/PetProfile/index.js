@@ -1,8 +1,8 @@
 import { Component } from 'pet-dex-utilities';
 import './index.scss';
 import Vaccine from '~src/components/Vaccine';
-import { findPetById, removePetsLocal, updatePetsLocal } from '~src/services/localStorage';
-import { addVaccine, removePet } from '~src/services/firebase';
+import { findPetById, updatePetsLocal } from '~src/services/localStorage';
+import { addVaccine, getPets, removePet } from '~src/services/firebase';
 import { Router } from 'vanilla-routing';
 import birthday from './images/birthday';
 import deleteSvg from './images/delete';
@@ -112,13 +112,22 @@ export default function PetProfile() {
   vaccines.mount($vaccinesContainer);
 
   vaccines.listen('group:change', async (vaccine) => {
-    await addVaccine(petSelect.id, vaccine)
-    window.location.reload()
+    try {
+      await addVaccine(petSelect.id, vaccine)
+      await getPets();
+    } catch(error) {
+      throw new Error(error);
+    }
+    
   });
 
   vaccines.listen('group:add', async (vaccine) => {
-    await addVaccine(petSelect.id, vaccine);
-    window.location.reload()
+    try {
+      await addVaccine(petSelect.id, vaccine)
+      await getPets();
+    } catch(error) {
+      throw new Error(error);
+    }
   });
 
 }

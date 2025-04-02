@@ -125,6 +125,7 @@ Vaccine.prototype = Object.assign(Vaccine.prototype, Component.prototype, {
     group.setItem(vaccine);
     this.emit('group:change', vaccine);
   },
+
   loadVaccines(vaccines) {
     vaccines.forEach((vaccine) => {
       const group = this.getGroup(vaccine);
@@ -145,6 +146,8 @@ Vaccine.prototype = Object.assign(Vaccine.prototype, Component.prototype, {
 
     return vaccines;
   },
+
+
   openDrawer() {
     this.emit('drawer:open');
   },
