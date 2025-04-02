@@ -157,7 +157,7 @@ export const logout = async () => {
     })
 
     await signOut(auth);
-    Router.go('/')
+    // Router.go('/')
 
     window.location.reload()
   } catch(error) {
