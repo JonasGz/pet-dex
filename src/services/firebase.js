@@ -47,8 +47,12 @@ export const getPets = async () => {
 
         if (userSnap.exists()) {
           const userData = userSnap.data();
-          const pets = userData.pets || [];
-          setPetsLocal(pets);
+          const pets = userData.pets || null
+            if(pets.length <= 0) {
+              setPetsLocal(null)
+            } else {
+              setPetsLocal(pets);
+            }
         } else {
           await removePetsLocal();
         }
@@ -64,7 +68,7 @@ onAuthStateChanged(auth, async (user) => {
   if (user) {
     const event = new CustomEvent('auth', { detail: { hasUser: true } });
     window.dispatchEvent(event);
-    getPets();
+    await getPets();
   } else {
     await removePetsLocal();
     const event = new CustomEvent('auth', { detail: { hasUser: false } });
@@ -215,7 +219,6 @@ export const addPet = async () => {
 
 export const removePet = async (petId) => {
   try {
-    console.log(petId)
     const userId = auth.currentUser.uid;
     const userRef = doc(db, 'users', userId);
     const userDoc = await getDoc(userRef);
