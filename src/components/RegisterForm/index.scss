@@ -118,12 +118,11 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 3rem;
-
+    width: 100%;
     margin-bottom: 3rem;
   }
 
   &__form-button {
-    max-width: 28rem;
     width: 100%;
   }
 }
