@@ -36,8 +36,11 @@ export default function VaccineItem({
   Component.call(this, { html, events });
   const {pathname} = window.location;
   const idUrl = pathname.split("/pet-profile/")[1];
-  const $vaccineItem = this.selected.get('vaccine-item')
-  $vaccineItem.addEventListener('click', async () => {
+  const isProfilePage = pathname.includes('/pet-profile')
+  
+  const $buttonDelete = this.selected.get('button-delete')
+
+  $buttonDelete.addEventListener('click', async () => {
     await removeVaccine(idUrl, id)
     await updateVaccineLocal(idUrl, id)
     await getPets();
@@ -47,6 +50,9 @@ export default function VaccineItem({
   this.setTitle(title);
   this.setVeterinary(veterinary);
   this.setDate(date);
+  
+  $buttonDelete.style.display = isProfilePage ? 'block' : 'none';
+  
 }
 
 VaccineItem.prototype = Object.assign(

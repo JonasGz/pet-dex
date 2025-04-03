@@ -16,7 +16,7 @@ const html = `
 
     <div class='pet-birthday__container'>
       <div class='pet-birthday__image' data-select='upload-image-container'></div>
-      <h1 class='pet-birthday__title'>Quantos anos tem o seu bichinho?</h1>
+      <h1 class='pet-birthday__title'>Qual a idade do seu bichinho?</h1>
       <div class='pet-birthday__input' data-select='input-container'></div>
       <h1 class='pet-birthday__title'>Quando seu bichinho faz aniversário?</h1>
       <div class='pet-birthday__input' data-select='input-container-birthday'></div>
@@ -42,13 +42,13 @@ export default function PetBirthday() {
   this.progress.mount($petProgress)
 
   this.input = new TextInput({
-    placeholder: '12',
-    type: 'number',
+    placeholder: '2 anos',
+    type: 'text',
   });
 
   this.inputBirthday = new TextInput({
-    placeholder: 'Data',
-    type: 'date',
+    placeholder: '15/04',
+    type: 'text',
   });
 
   this.petImage = new PetImage(petImage.name.image.imageLocal);
@@ -56,6 +56,33 @@ export default function PetBirthday() {
     text: 'Continuar',
     isFullWidth: true,
     isDisabled: false,
+  });
+
+  function formatarData(input) {
+    let valor = input.value.replace(/\D/g, '');
+    if (valor.length > 2) {
+      valor = `${valor.substring(0, 2)  }/${  valor.substring(2, 4)}`;
+    }
+    // eslint-disable-next-line no-param-reassign
+    input.value = valor;
+  }
+
+  function permitirApenasNumeros(event) {
+    const tecla = event.key;
+    return /\d/.test(tecla) || tecla === 'Backspace' || tecla === 'Delete';
+  }
+
+  const $inputBirthday = this.inputBirthday.selected.get('input-text');
+  $inputBirthday.setAttribute('maxlength', '5');
+
+  $inputBirthday.addEventListener('input', (e) => {
+    formatarData(e.target);
+  });
+  
+  $inputBirthday.addEventListener('keypress', (e) => {
+    if (!permitirApenasNumeros(e)) {
+      e.preventDefault();
+    }
   });
 
   const buttonEnabled = () => {
