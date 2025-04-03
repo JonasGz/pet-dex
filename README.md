@@ -11,7 +11,3 @@ O PetDex é um projeto mobile/desktop com o objetivo de cadastrar seus pets e su
 Se tiver alguma dúvida ou precisar de ajuda, fique à vontade para entrar em contato comigo [Linkedin](https://www.linkedin.com/in/jonas-chagas/).
 
 Obrigado pelo seu interesse no PetDex! Espero que você aproveite o aplicativo tanto foi legal de construí-lo.
-
-## **Observação**
-
-O projeto era open-source na qual eu contribuia, porém, por motivos de força maior o projeto foi abandonado, para não perder a ideia e todo o trabalho realizado eu decidi continuar o projeto transformando algumas ideias com o objetivo de eternizar esse projeto.
