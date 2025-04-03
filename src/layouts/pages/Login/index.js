@@ -14,17 +14,17 @@ export default function Login() {
   Component.call(this, { html });
 
   const $container = this.selected.get('container');
-
   this.loginForm = new LoginForm();
 
   this.loginForm.mount($container)
 
   this.loginForm.listen('login', async (email, password) => {
      try {
-         await login(email, password);
-         Router.go('/pets');
+        await login(email, password);
+          Router.go('/pets');
        } catch(error) {
-         throw new Error(error);
+        // eslint-disable-next-line no-alert
+        alert('Email ou senha inválidos!')
        }
   })
 
