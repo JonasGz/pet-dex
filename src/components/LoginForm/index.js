@@ -7,12 +7,11 @@ import './index.scss';
 
 import pawIcon from './images/paw-form-icon.svg';
 import googleIcon from './images/google-icon.svg';
-import facebookIcon from './images/facebook-icon.svg';
 
 const events = ['login', 'login-google', 'login-facebook'];
 
 const html = `
-  <div>
+  <div class="login-form-container__container">
     <div class="login-form-container__container-paw-icon">
       <img class="paw-icon" src="${pawIcon}" alt="Ícone de uma pata de animal" />
     </div>
@@ -63,8 +62,6 @@ export default function LoginForm() {
   $googleLogin.addEventListener('click', () => {
     this.loginGoogle()
   })
-
-
 
   const emailInput = new TextInput({ id: 'emailInputLogin', placeholder: 'E-mail' });
   const passwordInput = new TextInput({

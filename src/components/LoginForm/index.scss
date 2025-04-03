@@ -7,10 +7,13 @@ $pawIconSize: 128px;
 .login-form-container {
   font-family: 'Poppins', sans-serif;
 
-  padding: 6.2rem 4rem;
-
+  padding: 5.2rem 0;
   background-color: rgb(255, 255, 255);
   border-radius: 1.5rem;
+
+  &__container {
+    width: 80%;
+  }
 
   &__container-paw-icon {
     width: 100%;
@@ -45,7 +48,7 @@ $pawIconSize: 128px;
     font-weight: 700;
     line-height: 1.6;
 
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
   }
 
   &__login-form {
@@ -179,11 +182,5 @@ $pawIconSize: 128px;
         max-width: 2.4rem;
       }
     }
-  }
-}
-
-@include breakpoints.from667 {
-  .login-form-container {
-    padding: 6.2rem 8rem;
   }
 }

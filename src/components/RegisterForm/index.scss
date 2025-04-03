@@ -5,7 +5,7 @@
 .register-form {
   display: flex;
   flex-direction: column;
-
+  width: 80%;
   align-items: center;
 
   justify-content: center;
@@ -123,17 +123,21 @@
   }
 
   &__form-button {
-    max-width: 45rem;
+    max-width: 28rem;
     width: 100%;
   }
 }
 
 @include breakpoints.from667 {
   .register-form {
-    max-width: 72.5rem;
+    max-width: 100rem;
 
     &__title {
       font-size: fonts.$xl2;
+    }
+
+    &__form-button {
+      max-width: 42rem;
     }
 
     &__form-fields {

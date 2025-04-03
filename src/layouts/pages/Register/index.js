@@ -24,7 +24,7 @@ export default function Register() {
       await register(name, email, password)
       Router.go('/')
     } catch(error) {
-      console.error('Erro ao registrar', error)
+      throw new Error(error);
     }
     
   })
