@@ -6,40 +6,45 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
   font-family: fonts.$primaryFont;
 
   &__container {
     display: flex;
-    justify-content: space-around;
+
     align-items: center;
+    justify-content: space-around;
   }
 
   &__container-title {
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
+
     align-items: center;
   }
 
   &__title {
-    font-weight: fonts.$semiBold;
-    color: #39434F;
+    color: colors.$gray800;
     font-size: 1.6rem;
+    font-weight: fonts.$semiBold;
   }
 
   &__subtitle {
-    font-weight: fonts.$regular;
-    color: #808B9A;
+    color: colors.$gray450;
     font-size: 1.4rem;
+    font-weight: fonts.$regular;
   }
 
   &__container-steps {
-    font-size: 1.2rem;
-    color: #39434F;
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
+
     align-items: center;
+
+    color: colors.$gray800;
+    font-size: 1.2rem;
   }
 
   &__step {
@@ -57,34 +62,22 @@
   &__container-bar {
     display: flex;
     flex-direction: row;
+
     align-items: center;
   }
 
   &__bar1 {
-    height: 0.7rem;
-    border-radius: 1rem;
     width: 25rem;
-    background-color: #FFC542;
+    height: 0.7rem;
+
+    background-color: colors.$primary300;
+    border-radius: 1rem;
   }
 
   &__bar2 {
-    height: 0.3rem;
     width: 100%;
-    background-color: #ECEFF2;
+    height: 0.3rem;
+
+    background-color: colors.$gray100;
   }
-  
 }
-
-@include breakpoints.from1280 {
-
-}
-
-@include breakpoints.from1024 {
-
-}
-
-@include breakpoints.from667 {
-  
-}
-
-

@@ -14,6 +14,10 @@ import register from './images/register.svg';
 import addpet from './images/addpet.svg';
 import './index.scss';
 
+const ROUTE_TO_ITEM = {
+  '/pet-name': 'add-pet',
+  '/pets': 'my-pets',
+};
 
 const html = `
   <nav class="side-menu-nav">
@@ -28,12 +32,12 @@ const html = `
       <img data-select="exitMenu" class="side-menu-nav__exitmenu" src="${exitMenu}" alt="Fechar Menu">
     </nav>
     <div class="side-menu-content">
-      <div class="side-menu-content__line"></div>
-      <div class="side-menu-content__yourpet">
+      <div class="side-menu-content__line" data-select="line-top"></div>
+      <div class="side-menu-content__yourpet" data-select="yourpet">
         <h2 class="side-menu-content__title-yourpet">Meus Pets</h2>
         <div class="side-menu-content__avatars-yourpet"  data-select="avatar-container"></div>
       </div>
-      <div class="side-menu-content__line"></div>
+      <div class="side-menu-content__line" data-select="line-bottom"></div>
       <div class="side-menu-content__itens" alt="itens-um">
         <ul class="side-menu-content__ul" data-select="menuitens">
         <li>
@@ -46,7 +50,7 @@ const html = `
               <img src="${meusPets}">Meus Pets
             </a>
           </li>
-          <div class="side-menu-content__lineinside"> <div/>
+          <li class="side-menu-content__lineinside" data-select="line-inside"></li>
           <li class="side-menu-content__register-li" data-select="register">
             <a data-vanilla-route-link="spa" class="side-menu-content__menuitens" href="/account/create-account">
               <img src="${register}" alt="registro">Registro
@@ -60,68 +64,76 @@ const html = `
         </ul>
       </div>
     </div>
-  </nav>
 `;
 
 export default function SideMenu() {
   Component.call(this, { html });
   const $container = this.selected.get('avatar-container');
-  const $register = this.selected.get("register");
-  const $login = this.selected.get("login");
-  const $addPet = this.selected.get('add-pet');
-  const $myPets = this.selected.get('my-pets')
+  const $register = this.selected.get('register');
+  const $login = this.selected.get('login');
   const $logo = this.selected.get('logo');
-  const hasUser = localStorage.getItem("hasUser");
+  const hasUser = localStorage.getItem('hasUser');
   const petsDb = JSON.parse(localStorage.getItem('pets'));
-  
+
   const addPet = new AvatarButton();
-  const $avatarAddPet = addPet.selected.get('avatar-button')
-  addPet.mount($container)
+  addPet.mount($container);
   addPet.listen('click', () => {
-    Router.go('/pet-name')
-  })
+    Router.go('/pet-name');
+  });
 
-  $logo.addEventListener('click', () => this.goRoute())
+  $logo.addEventListener('click', () => this.goRoute());
 
-  if(hasUser === "true") {
-    $register.style.pointerEvents = "none"
-    $register.style.opacity = "0.6"
+  $register.classList.add('side-menu-content__menuitem--hidden');
+  $login.classList.add('side-menu-content__menuitem--hidden');
+  this.selected
+    .get('line-inside')
+    .classList.add('side-menu-content__menuitem--hidden');
 
-    $login.style.pointerEvents = "none"
-    $login.style.opacity = "0.6"
-    if(petsDb) {
+  if (hasUser === 'true') {
+    if (petsDb) {
       petsDb.forEach((pet) => {
-        const avatar = new PetAvatar({id: pet.id, title: pet.name.name, imgSrc: pet.name.image.imageStorage})
-       avatar.mount($container)
+        const avatar = new PetAvatar({
+          id: pet.id,
+          title: pet.name.name,
+          imgSrc: pet.name.image.imageStorage,
+        });
+        avatar.mount($container);
       });
     }
-    
 
     const $exit = this.selected.get('exit');
     $exit.addEventListener('click', async () => {
-      await logout()
-    })
-
-  } else {
-    $addPet.style.pointerEvents = "none"
-    $addPet.style.opacity = "0.6"
-
-    $myPets.style.pointerEvents = "none"
-    $myPets.style.opacity = "0.6"
-
-    $avatarAddPet.style.pointerEvents = 'none'
-    $avatarAddPet.style.opacity = "0.6"
-
-    addPet.selected.get('avatar-button').style.pointerEvents = 'none';
-    addPet.selected.get('avatar-button').style.opacity = '0.6';
+      await logout();
+    });
   }
 
+  this.syncActiveRoute();
 
+  const handleRouteChange = () => this.syncActiveRoute();
+  window.addEventListener('routechange', handleRouteChange);
 
+  this.listen('unmount', () => {
+    window.removeEventListener('routechange', handleRouteChange);
+  });
 }
 
 SideMenu.prototype = Object.assign(SideMenu.prototype, Component.prototype, {
   goRoute() {
-    Router.go('/')
-  }
+    Router.go('/');
+  },
+
+  syncActiveRoute() {
+    const $menuItems = this.selected.get('menuitens').querySelectorAll('li');
+    $menuItems.forEach(($li) => {
+      $li.classList.remove('side-menu-content__menuitens--active');
+    });
+
+    const activeItem = ROUTE_TO_ITEM[window.location.pathname];
+    if (!activeItem) return;
+
+    this.selected
+      .get(activeItem)
+      .closest('li')
+      .classList.add('side-menu-content__menuitens--active');
+  },
 });

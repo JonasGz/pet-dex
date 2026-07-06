@@ -11,11 +11,11 @@ import menuUrl from './images/menu.svg';
 
 const html = `
   <div class="navigation">
-    <figure class="navigation__logo-container" data-select="logo">
+    <figure class="navigation__logo-container" data-select="logo" tabindex="0">
       <img  class="navigation__logo" src="${petUrl}" alt="pet-dex logo" />
     </figure>
     <div class="navigation__icons">
-      <figure data-select="hamburger-menu" class="navigation__icon-container navigation__icon-container--menu">
+      <figure data-select="hamburger-menu" tabindex="0" class="navigation__icon-container navigation__icon-container--menu">
         <img class="navigation__icon" src="${menuUrl}" alt="menu" />
       </figure>
       <figure class="navigation__icon-container navigation__icon-container--bell">
@@ -24,7 +24,7 @@ const html = `
       <figure class="navigation__icon-container navigation__icon-container--avatar">
         <img class="navigation__icon" src="${avatarUrl}" alt="user avatar" />
       </figure>
-      <figure data-select="exit" class="navigation__icon-container navigation__icon-container--exit">
+      <figure data-select="exit" tabindex="0" class="navigation__icon-container navigation__icon-container--exit">
         <img class="navigation__icon" src="${exitUrl}" alt="exit button" />
       </figure>
     </div>
@@ -34,21 +34,24 @@ const html = `
 export default function Navigation() {
   Component.call(this, { html });
   const $logo = this.selected.get('logo');
-  const hasUser = localStorage.getItem("hasUser");
+  const hasUser = localStorage.getItem('hasUser');
 
-  if(hasUser === 'true') {
+  if (hasUser === 'true') {
     const $exit = this.selected.get('exit');
-    $exit.addEventListener('click', () => logout())
+    $exit.addEventListener('click', () => logout());
   }
 
   $logo.addEventListener('click', () => {
-    this.goHome()
-  })
- 
+    this.goHome();
+  });
 }
 
-Navigation.prototype = Object.assign(Navigation.prototype, Component.prototype, {
-  goHome() {
-    Router.go('/')
-  }
-});
+Navigation.prototype = Object.assign(
+  Navigation.prototype,
+  Component.prototype,
+  {
+    goHome() {
+      Router.go('/');
+    },
+  },
+);

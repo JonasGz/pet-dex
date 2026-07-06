@@ -5,23 +5,30 @@
 .card-pet-container {
   max-width: 45rem;
   height: 29rem;
-  background-color: #1B85F3;
-  border-radius: 2rem;
-  border: 1px solid #F7FAFC;
+
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
   align-items: center;
+  justify-content: center;
+
   font-family: fonts.$primaryFont;
-  color: #fff;
+  color: colors.$white;
   text-align: center;
+
+  border: 1px solid rgb(247, 250, 252);
+
+  background-color: colors.$primary200;
+  border-radius: 2rem;
+
   cursor: pointer;
 
   &__infos {
     display: flex;
     flex-direction: column;
     gap: 6rem;
-    padding: 2rem 0 2rem 0;
+
+    padding: 2rem 0;
   }
 
   &__name-type {
@@ -31,12 +38,12 @@
   }
 
   &__name {
-    font-weight: fonts.$semiBold;
     font-size: fonts.$lg;
+    font-weight: fonts.$semiBold;
   }
 
   &__type {
-    color: #ffffffbb;
+    color: rgba(colors.$white, 0.73);
     font-size: fonts.$xs;
   }
 
@@ -54,6 +61,7 @@
 
   &__desc {
     width: 25rem;
+
     font-family: fonts.$fourthFont;
     font-weight: fonts.$regular;
   }
@@ -61,51 +69,64 @@
   &__img-border1 {
     width: 20.8rem;
     height: 20.8rem;
-    border-radius: 50%;
-    background: #ffffff0a;
+
     display: flex;
-    justify-content: center;
+
     align-items: center;
+    justify-content: center;
+
+    background: rgba(colors.$white, 0.04);
+    border-radius: 50%;
   }
 
   &__img-border2 {
     width: 17.2rem;
     height: 17.2rem;
-    border-radius: 50%;
-    background: #ffffff13;
+
     display: flex;
-    justify-content: center;
+
     align-items: center;
+    justify-content: center;
+
+    background: rgba(colors.$white, 0.075);
+    border-radius: 50%;
   }
 
   &__img-border3 {
     width: 13.3rem;
     height: 13.3rem;
-    border-radius: 50%;
-    background: #ffffff18;
+
     display: flex;
-    justify-content: center;
+
     align-items: center;
+    justify-content: center;
+
+    background: rgba(colors.$white, 0.09);
+    border-radius: 50%;
   }
 
   &__img {
     width: 12.4rem;
     height: 12.4rem;
+
     border-radius: 50%;
   }
-
 }
 
 @include breakpoints.from1280 {
   .card-pet-container {
     max-width: 57rem !important;
+
     flex-direction: row !important;
+
     justify-content: space-between;
+
     padding: 0 3rem 0 2rem;
+
     &__infos {
       width: 25rem;
     }
-    
+
     &__info {
       display: block !important;
     }
@@ -116,14 +137,20 @@
   .card-pet-container {
     width: 25rem;
     height: 28rem;
-    background-color: #1B85F3;
-    border-radius: 1.8rem;
-    border: 1px solid #F7FAFC;
+
     display: flex;
-    justify-content: space-between;
+
     align-items: center;
+    justify-content: space-between;
+
     font-family: fonts.$primaryFont;
-    color: #fff;
+    color: colors.$white;
+
+    border: 1px solid rgb(247, 250, 252);
+
+    background-color: colors.$primary200;
+    border-radius: 1.8rem;
+
     cursor: pointer;
   }
 }
@@ -132,16 +159,22 @@
   .card-pet-container {
     width: 25rem;
     height: 28rem;
-    background-color: #1B85F3;
-    border-radius: 1.8rem;
-    border: 1px solid #F7FAFC;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: fonts.$primaryFont;
-    color: #fff;
-    cursor: pointer;
     flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    font-family: fonts.$primaryFont;
+    color: colors.$white;
+
+    border: 1px solid rgb(247, 250, 252);
+
+    background-color: colors.$primary200;
+    border-radius: 1.8rem;
+
+    cursor: pointer;
 
     &__info {
       display: none;
@@ -149,8 +182,4 @@
       gap: 1rem;
     }
   }
-
-  
 }
-
-

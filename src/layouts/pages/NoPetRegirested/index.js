@@ -13,7 +13,7 @@ const html = `
       </div>
       <img class="no-pet-regirested-page__image" src="${petUrl}" alt="dog in an smart phone" />
     </div>
-  </div>;
+  </div>
 `;
 
 export default function NoPetRegirested() {

@@ -18,19 +18,33 @@
   background-color: colors.$primary600;
   transform: translateX(-100vw);
 
+  transition: transform 0.3s;
+
   &--open-menu {
     width: 100vw;
 
     transform: translateX(0);
-
-    transition: transform 0.3s;
   }
 
   &--exit-menu {
     width: 200vw;
 
     transform: translateX(-100vw);
+  }
 
+  &--no-sidemenu {
+    width: 100vw;
+
+    grid-template-areas:
+      'nav'
+      'content';
+    grid-template-columns: 100vw;
+
+    transform: none;
+
+    .home__sidemenu {
+      display: none;
+    }
   }
 
   &__navigation {
@@ -55,11 +69,13 @@
   }
 
   &__content-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -67,6 +83,7 @@
   .home {
     width: 100vw;
     height: 100dvh;
+
     grid-template-areas:
       'sidemenu nav'
       'sidemenu content';
@@ -85,6 +102,13 @@
 
     &__sidemenu {
       display: block;
+    }
+
+    &--no-sidemenu {
+      grid-template-areas:
+        'nav'
+        'content';
+      grid-template-columns: 1fr;
     }
   }
 }

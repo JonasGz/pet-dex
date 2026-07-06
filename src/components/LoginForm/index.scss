@@ -8,6 +8,7 @@ $pawIconSize: 128px;
   font-family: 'Poppins', sans-serif;
 
   padding: 5.2rem 0;
+
   background-color: rgb(255, 255, 255);
   border-radius: 1.5rem;
 
@@ -36,7 +37,6 @@ $pawIconSize: 128px;
     .paw-icon {
       width: 100%;
 
-      margin-bottom: 4.5rem;
       padding: 1.6rem;
     }
   }
@@ -54,7 +54,7 @@ $pawIconSize: 128px;
   &__login-form {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
 
     .input-text-container {
       &__input {
@@ -109,7 +109,7 @@ $pawIconSize: 128px;
     text-align: center;
     line-height: 2.4rem;
 
-    margin: 3rem 0;
+    margin: 2rem 0;
 
     .signup-link {
       color: colors.$blue600;

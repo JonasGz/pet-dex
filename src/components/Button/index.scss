@@ -1,6 +1,11 @@
 @use '~styles/colors.scss' as colors;
 
 .button {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
   font-family: 'Noto Sans', sans-serif;
   color: rgb(255, 255, 255);
   font-size: 1.6rem;
@@ -13,21 +18,22 @@
   border-radius: 1.4rem;
 
   transition: 0.3s ease-in-out;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
   cursor: pointer;
   appearance: none;
 
   &__slider {
-    background-color: #fff;
-    box-shadow: 0 1px 4px 0 #8B9EB8;
-    color: #1B85F3;
     width: 5rem;
     height: 5rem;
 
+    color: colors.$primary200;
+
+    background-color: colors.$white;
+    box-shadow: 0 1px 4px 0 rgb(139, 158, 184);
+
     &:hover:not(:disabled) {
-      color: #fff;
+      color: colors.$white;
+
       opacity: 0.8;
     }
   }
@@ -43,10 +49,14 @@
     transform: scale(1.02);
   }
 
+  &:focus-visible {
+    outline: 2px solid colors.$primary200;
+    outline-offset: 2px;
+  }
+
   &:disabled {
     background: colors.$gray600;
 
     cursor: not-allowed;
   }
-
 }
